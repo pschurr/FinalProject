@@ -16,11 +16,11 @@ class Grass: public Terrain{
 
 Grass::Grass()
 	:Terrain(){
-	//isWalkedOn=false;
+
 }
 
 void Grass::display(){
-	cout<<"G";
+	cout<<".";
 }
 
 #endif

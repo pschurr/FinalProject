@@ -16,7 +16,7 @@ Water::Water(){
 }
 
 void Water::display(){
-	cout<<"w";
+	cout<<"~";
 }
 
 #endif

@@ -5,31 +5,21 @@
 #include "grass.h"
 #include "water.h"
 #include "map.h"
+#include "character.h"
+#include "player.h"
+#include "enemy.h"
 using namespace std;
 
 int main(){
-	/*vector<vector<Terrain *> > map;
-	//Terrain *  map[10][10];
-	for(int i=0;i<50;i++){
-		vector<Terrain *> tempVec;
-		for(int j=0;j<50;j++){
-			if(i+j==25){
-				tempVec.push_back(new Water());
-			}else{
-				tempVec.push_back(new Grass());
-			}
-		}
-		map.push_back(tempVec);
-	}
-	for(int i=0;i<50;i++){
-		for(int j=0;j<50;j++){
-			map[i][j]->display();
-		}
-		cout<<endl;
-	}*/
-
-	Map m1;
-	Map m2("map2.txt");
+	Map m1; //default map (all grass)
+	Map m2("map2.txt"); //non-default map
+	cout<<"Map 1: Default"<<endl;
 	m1.display();
+	cout<<"Map 2: file input"<<endl;
 	m2.display();
+	cout<<"Add characters to map 2"<<endl;
+	m2.addCharacter(new Player(24,24,100,100,100)); //add character at (24,24)
+	m2.addCharacter(new Enemy(35,35,100,100,100)); //add character at (35,35)
+	m2.display();
+	cout<<"~ = water, . = grass, X = character"<<endl;
 }
