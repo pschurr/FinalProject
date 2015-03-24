@@ -1,0 +1,45 @@
+Ben Kennel
+3/24/15
+				Lab 7/8 Report
+
+	In this lab, I worked on establishing a basic class hierarchy for my group
+project. The goal of our project is to create a turn-based fighting game similar to 
+Fire Emblem. To start, I worked on creating a Terrain class hierarchy that could be 
+used to monitor and display the contents of the in-game map. Essentially, there is an
+abstract base class, Terrain, that as of now has two derived classes, Grass and Water.
+Each derived class has its own display function that differentiates each type when they
+are displayed. A Map class was also created to store information about Terrain objects
+via composition. The Map has a two-dimensional vector of pointers to Terrain objects, 
+and can read from a file to determine where to create Water and Grass objects. The vector
+of Terrain objects enables polymorphic behavior, so that the Map can call display with
+the Terrain pointers to call the appropriate version of the function, depending on if
+the object is Water or Grass. 
+	The Map class also contains information for a separate Character hierarchy. This
+has an abstract base class Character, and currently two derived classes, Player and 
+Enemy. Right now, the two derived classes are mostly the same, but later functionality
+will be added so that the user controls the player, while the enemy is computer-
+controlled. The Map class has a vector of pointers to Character, which functions as a 
+list of all characters on the map. This setup is intended for any information that is
+displayed to all be stored within one class, the Map class. Ideally, the Map object 
+should know what type each Terrain tile is, which ones have characters on them and which
+ones do not, and how to change the display accordingly depending on the properties of 
+the tile. However, I am still coming up with a way to add this. Right now, the Map 
+can tell if a character is on a tile, and display an X corresponding to this, but it
+cannot distinguish if that character is a Player or an Enemy. 
+	This is an important beginning step in our project. It provides a basic 
+foundation for how the game can be played, and we can build on the basic hieerarchy
+to add more functionality for both the terrain and the characters. Additionally, we 
+plan to modify the display functions to incorporate SDL, so that the game can have a
+more detailed display.
+
+Time log:
+3/17 - 1 hr: Defined abstract base class Terrain, and derived classes Grass and Water
+3/22 - 2 hrs: Defined Map class to store Terrain information, enabled polymorphic
+	behavior with Terrain objects' display functions, enabled file input for creating
+	maps
+3/23 - 2 hrs: Defined basic Character class hierarchy, added Character pointers to Map
+	class to know where characters are on the map, change map display to reflect
+	characters on map
+
+Code can be found in our group repository:
+

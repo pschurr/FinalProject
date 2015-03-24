@@ -7,8 +7,8 @@ using namespace std;
 
 class Enemy:public Character{
 	public:
-		Character();
-		Character(int,int,int,int,int);
+		Enemy();
+		Enemy(int,int,int,int,int);
 		virtual void display();
 	private:
 

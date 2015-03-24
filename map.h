@@ -6,15 +6,18 @@
 #include <vector>
 #include <string>
 #include "terrain.h"
+#include "character.h"
 using namespace std;
 
 class Map{
 	public:
 		Map();
 		Map(string); //Read Map elements from file
+		void addCharacter(Character *); //Add a character to map
 		void display(); //Display map
 	private:
 		vector<vector<Terrain *> > map;
+		vector<Character *> characters; //all characters on map
 };
 
 Map::Map(){
@@ -48,10 +51,20 @@ Map::Map(string filename){
 	}
 }
 
+void Map::addCharacter(Character * newChar){
+	int x=newChar->getX();
+	int y=newChar->getY();
+	map[x][y]->walkOn();
+	characters.push_back(newChar);
+}
+
 void Map::display(){
 	for(int i=0;i<50;i++){
 		for(int j=0;j<50;j++){
-			map[i][j]->display();
+			if(!map[i][j]->hasCharacter())
+				map[i][j]->display();
+			else
+				cout<<"X";
 		}
 		cout<<endl;
 	}
