@@ -6,8 +6,9 @@
 #include "water.h"
 #include "map.h"
 #include "character.h"
-#include "player.h"
-#include "enemy.h"
+//#include "player.h"
+//#include "enemy.h"
+#include "knight.h"
 using namespace std;
 
 int main(){
@@ -18,8 +19,31 @@ int main(){
 	cout<<"Map 2: file input"<<endl;
 	m2.display();
 	cout<<"Add characters to map 2"<<endl;
-	m2.addCharacter(new Player(24,24,100,100,100)); //add character at (24,24)
-	m2.addCharacter(new Enemy(35,35,100,100,100)); //add character at (35,35)
+	
+	Character* c1=new Knight(35,32,100,100,100,5,false);
+	Character* c2=new Knight(35,35,100,100,100,5,true);
+	m2.addCharacter(c1);
+	m2.addCharacter(c2);
+	//m2.addCharacter(new Knight(35,32,100,100,100,5)); //add character at (24,24)
+	//m2.addCharacter(new Knight(35,35,100,100,100,5)); //add character at (35,35)
 	m2.display();
-	cout<<"~ = water, . = grass, X = character"<<endl;
+	cout<<"~ = water, . = grass, P = player, E = enemy"<<endl;
+//	m2.showCharacters();
+	m2.checkCharsInRange();
+	m2.showCharsInRange();
+	c1->attack(c2);
+	cout<<c2->getHealth()<<endl;
+	c1->attack(c2);
+	cout<<c2->getHealth()<<endl;
+	Character* c3=new Knight(21,25,100,100,100,5,false);
+	m2.addCharacter(c3);
+	c3->attack(c2);
+	cout<<c2->getHealth()<<endl;
+	
+	c1->attack(c2);
+	cout<<c2->getHealth()<<endl;
+	c1->attack(c2);
+	cout<<c2->getHealth()<<endl;
+	c1->attack(c2);
+	cout<<c2->getHealth()<<endl;
 }

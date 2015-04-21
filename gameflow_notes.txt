@@ -1,0 +1,24 @@
+Gameplay Notes/Logic:
+
+-Player will have up to 5 party members and enemy will have up to 5 party 
+members
+-Teams will alternate turns, in which each member of a given team can move to a
+different location and then attack
+-Type of character determines how far they can move, "faster" characters can 
+move further but will have less attack or defense power
+-Every 5th turn, "Mortal Kombat" mode may activate, allowing two characters to 
+fight each other (player controls member of own party)
+-Characters must be within a certain distance of another character to attack
+-Upon defeating an enemy, players will gain experience and/or gold
+-Player's team will try to defend a castle or claim enemy's castle by 
+surrounding the castle and defeating a certain number of enemy characters
+-Player wins by claiming enemy castle, and loses if all of their party is 
+defeated
+
+Player classes:
+-3 types of characters: Knight(melee), Archer(ranged), Mage(magic)
+-Archers can attack from further away (greater range) but are less capable
+defenders
+-Mages can cast spells that change own/enemy's stats, can do damage or heal
+self or allies
+

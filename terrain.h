@@ -10,6 +10,7 @@ class Terrain{
 		Terrain();
 		virtual void display() = 0;
 		bool hasCharacter();
+		Character* getCharacter();
 		void walkOn(Character*);
 		void walkOff();
 	protected:
@@ -28,6 +29,8 @@ bool Terrain::hasCharacter(){
 	else
 		return false;
 }
+
+Character* Terrain::getCharacter(){return charOnSpace;}
 
 void Terrain::walkOn(Character * newChar){
 	isWalkedOn=true;

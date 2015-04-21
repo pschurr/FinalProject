@@ -15,6 +15,8 @@ class Map{
 		Map(string); //Read Map elements from file
 		void addCharacter(Character *); //Add a character to map
 		void display(); //Display map
+		void showCharsInRange(); //Show list of characters on map
+		void checkCharsInRange();
 	private:
 		vector<vector<Terrain *> > map;
 		vector<Character *> characters; //all characters on map
@@ -54,19 +56,42 @@ Map::Map(string filename){
 void Map::addCharacter(Character * newChar){
 	int x=newChar->getX();
 	int y=newChar->getY();
-	map[x][y]->walkOn();
+	map[x][y]->walkOn(newChar);
 	characters.push_back(newChar);
 }
 
 void Map::display(){
 	for(int i=0;i<50;i++){
-		for(int j=0;j<50;j++){
-			if(!map[i][j]->hasCharacter())
-				map[i][j]->display();
-			else
-				cout<<"X";
-		}
+		for(int j=0;j<50;j++)
+			map[i][j]->display();
 		cout<<endl;
+	}
+}
+
+void Map::showCharsInRange(){
+	for(int i=0;i<characters.size();i++){
+		for(int j=0;j<characters[i]->charsInRange.size();j++){
+			if(characters[i]->charsInRange[j]!=NULL){
+				cout<<"At "<<characters[i]->getX()<<", "<<characters[i]->getY()<<": ";
+				cout<<"Enemy found within range!"<<endl;
+			}
+		}
+	}
+}
+
+void Map::checkCharsInRange(){
+	for(int i=0;i<characters.size();i++){
+		//Character c=characters[i];
+		for(int j=characters[i]->getX()-characters[i]->getRange();
+			j<characters[i]->getX()+characters[i]->getRange();j++){
+			for(int k=characters[i]->getY()-characters[i]->getRange();
+				k<characters[i]->getY()+characters[i]->getRange();k++){
+				//if(map[i][j].hasCharacter())
+				if(map[j][k]->getCharacter()!=characters[i])
+					characters[i]->charsInRange.push_back(map[j][k]->getCharacter());
+
+			}
+		}
 	}
 }
 
