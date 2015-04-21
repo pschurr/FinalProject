@@ -1,0 +1,11 @@
+Hours: 
+       - Patrick: SDL, github,gameflow, 5 hours
+       - Ben: map hierarchy, 5-6 hours
+       - Isaiah: SDL,5 hours
+       - Chris:
+
+Our next goal is to apply the map hierarchy into SDL 2 in order to make a functioning board display. Character hierarchy and Character interaction are the next topics we aim to focus on; for example, allowing characters to fight each other on the map. 
+
+What we have accomplished so far is establishing a basic board hierarchy, beginning to grasp how to work with SDL and gitHub. The next several steps should be fairly time demanding, probably requiring around 20 hours of work. 
+
+Most of our proposed goals in our rubric were accomplished, with some struggles coming with learning SDL. To this end, having functioning programs with objects moving across the screen was not accomplished, and the map is not displayable yet.

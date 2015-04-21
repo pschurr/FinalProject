@@ -42,4 +42,4 @@ Time log:
 	characters on map
 
 Code can be found in our group repository:
-
+https://github.com/pschurr/FinalProject 

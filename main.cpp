@@ -20,8 +20,8 @@ int main(){
 	m2.display();
 	cout<<"Add characters to map 2"<<endl;
 	
-	Character* c1=new Knight(35,32,100,100,100,5,false);
-	Character* c2=new Knight(35,35,100,100,100,5,true);
+	Character* c1=new Knight(13,26,100,100,100,5,false);
+	Character* c2=new Knight(13,29,100,100,100,5,true);
 	m2.addCharacter(c1);
 	m2.addCharacter(c2);
 	//m2.addCharacter(new Knight(35,32,100,100,100,5)); //add character at (24,24)

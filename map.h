@@ -46,7 +46,8 @@ Map::Map(string filename){
 				tempVec.push_back(new Grass());
 			else if(c=='W')
 				tempVec.push_back(new Water());
-			
+			else
+				tempVec.push_back(new Grass());
 		}
 		map.push_back(tempVec);
 		tempVec.clear();
@@ -61,9 +62,10 @@ void Map::addCharacter(Character * newChar){
 }
 
 void Map::display(){
-	for(int i=0;i<50;i++){
-		for(int j=0;j<50;j++)
+	for(int i=0;i<25;i++){
+		for(int j=0;j<50;j++){
 			map[i][j]->display();
+		}
 		cout<<endl;
 	}
 }
