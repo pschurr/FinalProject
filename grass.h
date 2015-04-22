@@ -20,7 +20,10 @@ Grass::Grass()
 }
 
 void Grass::display(){
-	cout<<".";
+	if(hasCharacter())
+		charOnSpace->display();
+	else
+		cout<<".";
 }
 
 #endif

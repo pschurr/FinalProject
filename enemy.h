@@ -8,7 +8,7 @@ using namespace std;
 class Enemy:public Character{
 	public:
 		Enemy();
-		Enemy(int,int,int,int,int);
+		Enemy(int,int,int,int,int,int);
 		virtual void display();
 	private:
 
@@ -17,8 +17,8 @@ class Enemy:public Character{
 Enemy::Enemy()
 	:Character(){}
 
-Enemy::Enemy(int x,int y,int h,int atk,int def)
-	:Character(x,y,h,atk,def){
+Enemy::Enemy(int x,int y,int h,int atk,int def,int r)
+	:Character(x,y,h,atk,def,r){
 
 }
 
