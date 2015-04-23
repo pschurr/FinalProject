@@ -1,4 +1,4 @@
-PROJECT = complete_map.cpp
+PROJECT = game_map.cpp
 
 PROJ_NAME = game
 
