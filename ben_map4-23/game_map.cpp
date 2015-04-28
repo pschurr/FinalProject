@@ -87,6 +87,8 @@ int main( int argc, char* args[] )
         }
 	else
 	{
+		if(gRenderer==NULL)
+			printf("gRenderer is NULL\n");
 		//The level tiles
                 Tile* tileSet[ TOTAL_TILES ];
 
