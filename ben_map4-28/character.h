@@ -61,7 +61,7 @@ Character::Character(){
 Character::Character(int x,int y,int h,int atk,int def,int r,bool team){
 	xloc=x;
 	yloc=y;
-	myType=0;
+	myType=4;
 	maxHealth=h;
 	health=maxHealth;
 	attackPwr=atk;

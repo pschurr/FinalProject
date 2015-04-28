@@ -27,7 +27,7 @@ Archer::Archer(int x,int y,int h,int atk,int def,int r,bool team)
 }
 
 void Archer::render(){
-	cout<<"Archer"<<endl;
+	//cout<<"Archer"<<endl;
         //myTile.render();
 }
 

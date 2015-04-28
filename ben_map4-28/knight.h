@@ -10,25 +10,24 @@ using namespace std;
 class Knight:public Character{
 	public:
 		Knight(int,int,bool);
-		Knight(int,int,int,int,int,int,bool);
+//		Knight(int,int,int,int,int,int,bool);
 		virtual void render();
 	private:
-
+		
 };
 
+
 Knight::Knight(int x,int y,bool team)
-	:Character(x,y,100,100,100,5,team){
+        :Character(x,y,100,100,100,5,team){
 
 }
 
-Knight::Knight(int x,int y,int h,int atk,int def,int r,bool team)
-	:Character(x,y,h,atk,def,r,team){
 	
-}
 
 void Knight::render(){
-	cout<<"Knight"<<endl;
-	//myTile.render();
+	//myTile.set_xpos(getX());
+	//myTile.set_ypos(getY());
+	myTile.render();
 }
 
 #endif

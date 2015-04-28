@@ -65,8 +65,8 @@ class Tile
 
 
 Tile::Tile(){
-mBox.x=0;
-mBox.y=0;
+	mBox.x=0;
+	mBox.y=0;
     //Set the collision box
        mBox.w = TILE_WIDTH;
         mBox.h = TILE_HEIGHT;
