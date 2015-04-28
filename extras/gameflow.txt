@@ -1,0 +1,11 @@
+Basis of Gameflow:
+
+The main game play will be turn based, with each player having the opportunity to use 5 moves, attacks, or some other action per turn. 
+
+It will be a game with two teams. 
+
+The objective is to destroy the other team’s base. Destroying opposing team characters earns experience points and gold. Experience points can level up your main character as the game progresses. The main character is the hero of each team, they have more health, are more powerful, and more skilled than all other characters. 
+
+If playing against a computer, the computer earns more characters a on a turn-based basis, every 5 turns a new character is randomly generated.  The player can purchase new characters with gold. 
+
+The main character has a power up move wherein they can attack a character and it is a battle to the death, in a live-action, mortal kombat situation. This move recharges every 10 turns. 
