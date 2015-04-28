@@ -28,7 +28,7 @@ Mage::Mage(int x,int y,int h,int atk,int def,int r,bool team)
 }
 
 void Mage::render(){
-	cout<<"Mage"<<endl;
+	//cout<<"Mage"<<endl;
         //myTile.render();
 }
 

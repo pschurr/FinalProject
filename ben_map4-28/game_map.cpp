@@ -109,24 +109,23 @@ int main( int argc, char* args[] )
                         bool quit = false;
                         //Event handler
                         SDL_Event e;
-                        int xpos = 0;
+                        int xpos=0;
                         int ypos = 0;
 
                         //Level camera
                         SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 
 			//Instantiate player characters
-			Character* c1=new Knight(13,13,false);
-			Character* c2=new Knight(22,13,false);
-			Character* c3=new Archer(15,15,false);
-			Character* c4=new Mage(24,16,false);
-			charVec.push_back(c1);
-			charVec.push_back(c2);
-			charVec.push_back(c3);
-			charVec.push_back(c4);
-
+                        Character* c1=new Knight(13,13,false);
+                        Character* c2=new Knight(11,11,false);
+                        Character* c3=new Archer(15,15,false);
+                        Character* c4=new Mage(24,16,false);
+                        charVec.push_back(c1);
+                        charVec.push_back(c2);
+                        charVec.push_back(c3);
+                        charVec.push_back(c4);
+		
 			Character* current=NULL;
-
                         //While application is running
                         while( !quit )
                         {
@@ -141,24 +140,35 @@ int main( int argc, char* args[] )
                                         if(e.type==SDL_MOUSEBUTTONDOWN){
                                         	int x,y;
                                         	SDL_GetMouseState(&x,&y);
-						//Iterate through character vector - if mouse click matches 
-						//character position, current points to that character
-                                        	if((x>xpos)&&(x<xpos+32)&&(y>ypos)&&(y<ypos+32)){
-							xpos+=32;
-                                       			ypos+=32;
+						for(int i=0;i<charVec.size();i++){
+							Character* c=charVec[i];
+							xpos=c->getX()*TILE_WIDTH;
+							ypos=c->getY()*TILE_HEIGHT;
+                                        		if((x>xpos)&&(x<xpos+32)&&(y>ypos)&&(y<ypos+32)){
+								current=c;
+								cout<<"Current character changed"<<endl;
+                                        		}
                                         	}
+					}
+                                        if(current != NULL && e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_UP){
+                                        	current->moveUp(32);
+						cout<<"Move up"<<endl;
+						ypos-=32;
                                         }
-                                        if(e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_UP){
-                                        	ypos-=32;
-                                        }
-                                        if(e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_RIGHT){
+                                        if(current != NULL && e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_RIGHT){
+						current->moveDown(32);
+						cout<<"Move right"<<endl;
                                         	xpos+=32;
                                         }
-                                        if(e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_DOWN){
-                                        	ypos+=32;
+                                        if(current != NULL && e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_DOWN){
+                                        	current->moveLeft(32);
+						cout<<"Move down"<<endl;
+						ypos+=32;
                                         }
-                                        if(e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_LEFT){
-                                        	xpos-=32;
+                                        if(current != NULL && e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_LEFT){
+                                        	current->moveRight(32);
+						cout<<"Move left"<<endl;
+						xpos-=32;
                                         }
 
 
@@ -168,7 +178,7 @@ int main( int argc, char* args[] )
                                 SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
                                 SDL_RenderClear( gRenderer );
                                 
-				//Knight jim;
+				Knight jim(xpos,ypos,0);
                                 gSpriteSheetTexture.render(xpos,ypos, &gSpriteClips[0]);      
 				//charVec.push_back(&jim);
 				 //gSpriteSheetTexture.render(xpos,ypos, &gSpriteClips[0]);
@@ -328,7 +338,7 @@ bool loadMedia()
 
                          SDL_Color textColor = { 0, 0, 0};
                          SDL_Color backColor = {255,255,255};
-                         if( !gTextTexture.loadFromRenderedText( "OUR GAME", textColor, backColor ) )
+                         if( !gTextTexture.loadFromRenderedText( "Fire Emblem", textColor, backColor ) )
                                  {
                                         printf( "Failed to render text texture!\n" );
                                                 success = false;
