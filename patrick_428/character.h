@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 #include "Tile.h"
+#include <SDL2/SDL.h>
+#include <string>
 
 using namespace std;
 
@@ -11,8 +13,9 @@ class Character{
 	friend class Map;
 	public:
 		Character();
-		Character(int,int,int,int,int,int,bool);
+		Character(string,int,int,int,int,int,int,bool);
 		virtual void render();
+		void handleEvent(SDL_Event);
 		int getX();
 		int getY();
 		int getHealth();
@@ -38,7 +41,8 @@ class Character{
 		bool isEnemy; //true if character is enemy, false if in player's party
 		bool isAlive; //becomes false when health>=0
 		vector<Character*> charsInRange; //all other characters that can be attacked
-		
+		string mName;		
+		bool onMe;
 };
 
 Character::Character(){
@@ -53,9 +57,13 @@ Character::Character(){
 	myTile.set_xpos(0);
 	myTile.set_ypos(0);
 	myTile.set_type(4);
+	mName = "default";
+	onMe = false;
 }
 
-Character::Character(int x,int y,int h,int atk,int def,int r,bool team){
+Character::Character(string name,int x,int y,int h,int atk,int def,int r,bool team){
+	onMe=false;
+	mName = name;
 	xloc=x;
 	yloc=y;
 	myType=4;
@@ -64,8 +72,8 @@ Character::Character(int x,int y,int h,int atk,int def,int r,bool team){
 	defensePwr=def;
 	range=r;
 	isEnemy=team;
-	myTile.set_xpos(x);
-	myTile.set_ypos(y);
+	myTile.set_xpos(xloc);
+	myTile.set_ypos(yloc);
 	myTile.set_type(myType);
 }
 
@@ -106,6 +114,46 @@ void Character::decrHealth(int amt){
 }
 void Character::render(){
 }
+
+void Character::handleEvent(SDL_Event e){
+	if(e.type==SDL_MOUSEBUTTONDOWN){
+	int mousex,mousey;
+	SDL_GetMouseState(&mousex,&mousey);
+
+		if((mousex>xloc)&&(mousex<xloc+32)&&(mousey>yloc)&&(mousey<yloc+32)){
+			std::cout<<"Chracter is now" << mName<<endl;
+			onMe=true;
+			}
+		else{
+			onMe=false;
+			}
+	}	
+
+
+	if(e.type==SDL_KEYDOWN){
+		if(onMe==true){
+			switch(e.key.keysym.sym){
+				case SDLK_DOWN:
+					yloc+=32;
+					break;
+				case SDLK_UP:
+					yloc-=32;
+					break;
+				case SDLK_LEFT:
+                                        xloc-=32;
+                                        break;
+				case SDLK_RIGHT:
+                                        xloc+=32;
+                                        break;
+
+				}
+		}		
+	}	
+myTile.set_xpos(xloc);
+myTile.set_ypos(yloc);
+
+}
+
 void Character::attack(Character * other){
 	bool inRange=false;
 	for(int i=0;i<charsInRange.size();i++){

@@ -29,6 +29,8 @@ const int TILE_GUESS = 4;
 
 
 //Scene textures
+
+LTexture gFontTexture;
 LTexture gTextTexture;
 LTexture gTileTexture;
 SDL_Rect gTileClips[ TOTAL_TILE_SPRITES ];

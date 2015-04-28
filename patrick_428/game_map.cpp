@@ -110,8 +110,16 @@ int main( int argc, char* args[] )
                         int xpos=0;
                          int ypos = 0;
 
+			Character* c1=new Knight("brock",32,32,false);
+                        Character* c2=new Knight("marry",64,64,false);
+                        Character* c3=new Knight("john",96,96,false);
+                        charVec.push_back(c1);
+                        charVec.push_back(c2);
+                        charVec.push_back(c3);
+			
+			Character* current = NULL;
                         //Level camera
-                        SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+                        //SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 
                         //While application is running
                         while( !quit )
@@ -120,42 +128,54 @@ int main( int argc, char* args[] )
                                 while( SDL_PollEvent( &e ) != 0 )
                                 {
                                         //User requests quit
-                                        if( e.type == SDL_QUIT )
+					 if( e.type == SDL_QUIT )
                                         {
                                                 quit = true;
                                         }
-                                        if(e.type==SDL_MOUSEBUTTONDOWN){
-                                        int x,y;
-                                        SDL_GetMouseState(&x,&y);
-                                        if((x>xpos)&&(x<xpos+32)&&(y>ypos)&&(y<ypos+32)){
-					xpos+=32;
-                                       	ypos+=32;
+					    
+					for(int i=0;i<charVec.size();i++){
+                                                 Character* c=charVec[i];
+						 c-> handleEvent(e);
+					}
+                                        /*if(e.type==SDL_MOUSEBUTTONDOWN){
+                                        	int x,y;
+                                        	SDL_GetMouseState(&x,&y);
+						for(int i=0;i<charVec.size();i++){
+							Character* c=charVec[i];
+							xpos=c->getX()*TILE_WIDTH;
+							ypos=c->getY()*TILE_HEIGHT;
+                                        		if((x>xpos)&&(x<xpos+32)&&(y>ypos)&&(y<ypos+32)){
+								current=c;
+								cout<<"Current character changed"<<endl;
+                                        		}
+                                        	}
+					}
+                                        if(current != NULL && e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_UP){
+                                        	current->moveUp(32);
+						cout<<"Move up"<<endl;
+						ypos-=32;
                                         }
+                                        if(current != NULL && e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_RIGHT){
+						current->moveDown(32);
+						cout<<"Move right"<<endl;
+                                        	xpos+=32;
                                         }
-                                        if(e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_UP){
-                                        ypos-=32;
+                                        if(current != NULL && e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_DOWN){
+                                        	current->moveLeft(32);
+						cout<<"Move down"<<endl;
+						ypos+=32;
                                         }
-                                        if(e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_RIGHT){
-                                        xpos+=32;
-                                        }
-                                        if(e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_DOWN){
-                                        ypos+=32;
-                                        }
-                                        if(e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_LEFT){
-                                        xpos-=32;
-                                        }
-
+                                        if(current != NULL && e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_LEFT){
+                                        	current->moveRight(32);
+						cout<<"Move left"<<endl;
+						xpos-=32;
+                                        }*/
 
                                 }
-
                                 //Clear screen
                                 SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
                                 SDL_RenderClear( gRenderer );
                                 
-				Knight jim(xpos,ypos,0);
-                                gSpriteSheetTexture.render(xpos,ypos, &gSpriteClips[0]);      
-				charVec.push_back(&jim);
-				 //gSpriteSheetTexture.render(xpos,ypos, &gSpriteClips[0]);
 				for(std::vector<Tile>::iterator it = mapVec.begin(); it!=mapVec.end(); ++it){
                                 Tile temp=*it;
 				temp.render();
