@@ -25,7 +25,6 @@ Knight::Knight(string name,int x,int y,bool team)
 }
 
 void Knight::render(){
-cout<<"knight "<< isEnemy<<endl;	
 myTile.renderKnight(isEnemy);
 }
 

@@ -122,7 +122,7 @@ kCharTexture.render(mBox.x, mBox.y, &kTileClips[0]);
 }
 else{
 kEnCharTexture.render(mBox.x, mBox.y, &kEnTileClips[0]);
-std::cout<<"should render enemy"<<std::endl;
+//std::cout<<"should render enemy"<<std::endl;
 }
 }
 void Tile::renderArcher(bool isEne)
