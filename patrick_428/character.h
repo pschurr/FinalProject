@@ -17,6 +17,7 @@ class Character{
 		virtual void render();
 		virtual void display();
 		int handleEvent(SDL_Event);
+		string getName();
 		int getX();
 		int getY();
 		int getHealth();
@@ -95,6 +96,7 @@ Character::Character(string name,int type,int x,int y,int h,int atk,int def,int 
         canMove[3]=true;
 }
 
+string Character::getName(){return mName;}
 int Character::getX(){return xloc;}
 int Character::getY(){return yloc;}
 int Character::getHealth(){return health;}

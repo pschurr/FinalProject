@@ -197,7 +197,7 @@ int main( int argc, char* args[] )
                                                         int xdiff=range-temp[j]->getX();
                                                         int ydiff=range-temp[j]->getY();
                                                         if(std::abs(xdiff)<range && std::abs(ydiff)<range){
-                                                                charVec[i]->addToRange(temp[j]);
+                                                                enemyVec[i]->addToRange(temp[j]);
                                                         }
                                                 }
                                                 temp.clear();
@@ -207,31 +207,41 @@ int main( int argc, char* args[] )
 					if(playerTurn){
 						for(int i=0;i<charVec.size();i++){
                                                 	Character* c=charVec[i];
-							//Key down
-							/*if(e.key.keysym.sym==SDLK_SPACE){
-								cout<<"Click on a character"<<endl;
-								int mousex, mousey;
-								if(SDL_PollEvent(&e) == SDL_MOUSEBUTTONDOWN){
-									SDL_GetMouseState(&mousex,&mousey);
-									vector<Character *> inRange=c->getCharsInRange();
-									for(int i=0;i<inRange.size();i++){
-										if((mousex-inRange[i]->getX())<32 && (mousey-inRange[i]->getY())<32)
-											c->attack(inRange[i]);
-									}
-								}
-								
-							}*/
 							s = c-> handleEvent(e);
 							if(s==1){
 								turnCount++;
-								cout<<"turn used"<<endl;
+								cout<<"turns remaining: "<<turns-turnCount<<endl;
 							}else if(s==2){
 								//Wait for mouse click
 								cout<<"Click on a character"<<endl;
-								SDL_WaitEvent(&e);
-								//if(e.type==SDL_MOUSEBUTTONDOWN){
-									cout<<"Mouse clicked"<<endl;
-								//}
+								SDL_Event g;
+								int x =0;
+								while(x==0){
+									SDL_PollEvent(&g);
+									if(g.type==SDL_MOUSEBUTTONDOWN){
+										int mousex,mousey;
+										SDL_GetMouseState(&mousex,&mousey);
+										vector<Character *> inRange=c->getCharsInRange();
+										Character* target;
+										for(int i=0;i<inRange.size();i++){
+											int xloc=inRange[i]->getX();
+											int yloc=inRange[i]->getY();
+											if(mousex-xloc<32 && mousex-xloc>0 && mousey-yloc<32
+												&& mousey-yloc>0){
+												target=inRange[i];
+												break;
+											}
+										}
+										cout<<c->getName()<<" attacks "<<target->getName()<<endl;
+										c->attack(target);
+										cout<<target->getName()<<"'s remaining health: ";
+										cout<<target->getHealth()<<"/"<<target->getMaxHealth()<<endl;
+										cout<<"Attack ends"<<endl;
+										x=1;
+									}
+								}
+								turnCount++;
+								cout<<"turns remaining: "<<turns-turnCount<<endl;
 							}
 						}
 					}else{
@@ -240,8 +250,42 @@ int main( int argc, char* args[] )
                                                         s = c-> handleEvent(e);
                                                         if(s==1){
                                                                 turnCount++;
-                                                                cout<<"turn used"<<endl;
+                                                                cout<<"turns remaining: "<<turns-turnCount<<endl;
+                                                        }else if(s==2){
+								//Wait for mouse click
+	                                                        cout<<"Click on a character"<<endl;
+                                                                SDL_Event h;
+                                                                int x =0;
+                                                                while(x==0){
+                                                                        SDL_PollEvent(&h);
+                                                                        if(h.type==SDL_MOUSEBUTTONDOWN){
+                                                                                int mousex,mousey;
+                                                                                SDL_GetMouseState(&mousex,&mousey);
+                                                                                vector<Character *> inRange=c->getCharsInRange();
+                                                                                Character* target;
+                                                                                for(int i=0;i<inRange.size();i++){
+                                                                                        int xloc=inRange[i]->getX();
+                                                                                        int yloc=inRange[i]->getY();
+											cout<<"---"<<endl;
+                                                                                        if(mousex-xloc<32 && mousex-xloc>0 && mousey-yloc<32
+                                                                                                && mousey-yloc>0){
+                                                                                                target=inRange[i];
+                                                                                                break;
+                                                                                        }
+                                                                                }
+                                                                                cout<<c->getName()<<" attacks "<<target->getName()<<endl;
+                                                                                c->attack(target);
+                                                                                cout<<target->getName()<<"'s remaining health: ";
+                                                                                cout<<target->getHealth()<<"/"<<target->getMaxHealth()<<endl;
+                                                                                cout<<"Attack ends"<<endl;
+                                                                                x=1;
+                                                                        }
+                                                                }
+								turnCount++;
+								cout<<"turns remaining: "<<turns-turnCount<<endl;
+
                                                         }
+
                                                 }
 
 					}
