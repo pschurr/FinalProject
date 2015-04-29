@@ -72,11 +72,12 @@ Character::Character(){
 	canMove[3]=true;
 }
 
-Character::Character(string name,int myType,int x,int y,int h,int atk,int def,int r,bool team){
+Character::Character(string name,int type,int x,int y,int h,int atk,int def,int r,bool team){
 	onMe=false;
 	mName = name;
 	xloc=x;
 	yloc=y;
+	myType = type;
 	maxHealth=h;
 	health=maxHealth;
 	attackPwr=atk;

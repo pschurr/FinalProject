@@ -25,7 +25,7 @@ Knight::Knight(string name,int x,int y,bool team)
 }
 
 void Knight::render(){
-	myTile.render();
+	myTile.renderChar();
 }
 
 void Knight::display(){

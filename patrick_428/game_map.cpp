@@ -580,6 +580,23 @@ bool setTiles()
                         gTileClips[ TILE_GUESS ].h = TILE_HEIGHT;
 		}
 	}
+	
+
+	gCharTexture.loadFromFile("pokemon.png");
+        cTileClips[0].x=16;
+        cTileClips[0].y=16;
+        cTileClips[0].w=32;
+        cTileClips[0].h=32;
+
+	cTileClips[1].x=32;
+        cTileClips[1].y=32;
+        cTileClips[1].w=32;
+        cTileClips[1].h=32;
+
+	cTileClips[2].x=32;
+        cTileClips[2].y=32;
+        cTileClips[2].w=32;
+        cTileClips[2].h=32;
 
 	//Close the file
 	map.close();

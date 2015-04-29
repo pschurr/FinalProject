@@ -29,12 +29,12 @@ const int TILE_GUESS = 4;
 
 
 //Scene textures
-
+LTexture gCharTexture;
 LTexture gFontTexture;
 LTexture gTextTexture;
 LTexture gTileTexture;
 SDL_Rect gTileClips[ TOTAL_TILE_SPRITES ];
-
+SDL_Rect cTileClips[3];
 
 class Tile
 {
@@ -46,7 +46,7 @@ class Tile
 
                 //Shows the tile
                 void render();
-		
+		void renderChar();
 		void set_xpos(int);
 		void set_ypos(int);
 		void set_type(int);
@@ -95,6 +95,13 @@ void Tile::render()
 {
         gTileTexture.render( mBox.x, mBox.y, &gTileClips[ mType ] );
 }
+
+
+void Tile::renderChar()
+{
+gCharTexture.render(mBox.x, mBox.y, &cTileClips[0]);
+}
+
 
 int Tile::getType()
 {
