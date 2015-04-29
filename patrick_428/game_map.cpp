@@ -115,13 +115,13 @@ int main( int argc, char* args[] )
 
 			Character* c1=new Knight("brock",32,32,false);
                         Character* c2=new Knight("marry",64,64,false);
-                        Character* c3=new Knight("john",96,96,false);
+                        Character* c3=new Archer("john",96,96,false);
                         charVec.push_back(c1);
                         charVec.push_back(c2);
                         charVec.push_back(c3);
 
 			Character* e1=new Knight("enemy1",15*32,12*32,true);
-			Character* e2=new Knight("enemy2",14*32,10*32,true);
+			Character* e2=new Archer("enemy2",14*32,10*32,true);
 			enemyVec.push_back(e1);
 			enemyVec.push_back(e2);
 			

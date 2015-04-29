@@ -12,6 +12,7 @@ class Archer:public Character{
         public:
                 Archer(string,int,int,bool);
                 virtual void render();
+		virtual void display();
         private:
 
 };
@@ -25,6 +26,13 @@ Archer::Archer(string name,int x,int y,bool team)
 
 void Archer::render(){
         myTile.render();
+}
+
+void Archer::display(){
+        cout<<"Selected character: "<<mName<<endl;
+        cout<<"Class: Archer"<<endl;
+        cout<<"Health: "<<health<<"/"<<maxHealth<<endl;
+
 }
 
 #endif

@@ -15,6 +15,7 @@ class Character{
 		Character();
 		Character(string,int,int,int,int,int,int,bool);
 		virtual void render();
+		virtual void display();
 		int handleEvent(SDL_Event);
 		int getX();
 		int getY();
@@ -125,6 +126,8 @@ void Character::decrHealth(int amt){
 void Character::render(){
 }
 
+void Character::display(){}
+
 int Character::handleEvent(SDL_Event e){
 	int status=0;
 	if(e.type==SDL_MOUSEBUTTONDOWN){
@@ -132,8 +135,7 @@ int Character::handleEvent(SDL_Event e){
 	SDL_GetMouseState(&mousex,&mousey);
 
 		if((mousex>xloc)&&(mousex<xloc+32)&&(mousey>yloc)&&(mousey<yloc+32)){
-			std::cout<<"Selected character: " << mName<<endl;
-			std::cout<<"Health: "<<health<<"/"<<maxHealth<<endl;
+			display();
 			onMe=true;
 			}
 		else{

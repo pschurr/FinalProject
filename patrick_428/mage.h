@@ -12,6 +12,7 @@ class Mage:public Character{
         public:
                 Mage(string,int,int,bool);
                 virtual void render();
+		virtual void display();
 		void heal(Character*);
         private:
 
@@ -26,6 +27,13 @@ Mage::Mage(string name,int x,int y,bool team)
 
 void Mage::render(){
         myTile.render();
+}
+
+void Mage::display(){
+        cout<<"Selected character: "<<mName<<endl;
+        cout<<"Class: Mage"<<endl;
+        cout<<"Health: "<<health<<"/"<<maxHealth<<endl;
+
 }
 
 void Mage::heal(Character* other){

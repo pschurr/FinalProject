@@ -12,6 +12,7 @@ class Knight:public Character{
 		Knight(string,int,int,bool);
 //		Knight(int,int,int,int,int,int,bool);
 		virtual void render();
+		virtual void display();
 		bool findEnemy();
 	private:
 		
@@ -23,10 +24,14 @@ Knight::Knight(string name,int x,int y,bool team)
 
 }
 
-	
-
 void Knight::render(){
 	myTile.render();
+}
+
+void Knight::display(){
+	cout<<"Selected character: "<<mName<<endl;
+	cout<<"Class: Knight"<<endl;
+	cout<<"Health: "<<health<<"/"<<maxHealth<<endl;
 }
 
 #endif
