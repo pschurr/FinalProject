@@ -18,7 +18,7 @@ class Archer:public Character{
 };
 
 Archer::Archer(string name,int x,int y,bool team)
-        :Character(name,x,y,100,80,80,20,team){
+        :Character(name,2,x,y,100,80,80,20,team){
 
 }
 

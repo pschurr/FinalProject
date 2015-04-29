@@ -19,7 +19,7 @@ class Mage:public Character{
 };
 
 Mage::Mage(string name,int x,int y,bool team)
-        :Character(name,x,y,100,80,80,5,team){
+        :Character(name,1,x,y,100,80,80,5,team){
 
 }
 

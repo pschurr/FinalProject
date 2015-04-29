@@ -13,7 +13,7 @@ class Character{
 	friend class Map;
 	public:
 		Character();
-		Character(string,int,int,int,int,int,int,bool);
+		Character(string,int,int,int,int,int,int,int,bool);
 		virtual void render();
 		virtual void display();
 		int handleEvent(SDL_Event);
@@ -72,12 +72,11 @@ Character::Character(){
 	canMove[3]=true;
 }
 
-Character::Character(string name,int x,int y,int h,int atk,int def,int r,bool team){
+Character::Character(string name,int myType,int x,int y,int h,int atk,int def,int r,bool team){
 	onMe=false;
 	mName = name;
 	xloc=x;
 	yloc=y;
-	myType=4;
 	maxHealth=h;
 	health=maxHealth;
 	attackPwr=atk;
