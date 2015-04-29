@@ -20,7 +20,7 @@ class Knight:public Character{
 
 
 Knight::Knight(string name,int x,int y,bool team)
-        :Character(name,0,x,y,100,100,100,5,team){
+        :Character(name,2,x,y,100,100,100,5,team){
 
 }
 
