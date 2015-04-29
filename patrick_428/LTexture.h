@@ -110,7 +110,7 @@ SDL_Texture* newTexture = NULL;
                 //Color key image
                 //SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0, 0xFF, 0xFF ) );
                 SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0x3D, 0x62, 0xCF ) );
-	if(file=="charSprites.png"){
+	if(file=="mage.png"){
                 SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0x5A,0x78,0xD4 ) );
 		}
                 //SDL_SetColorKey( loadedSurface, SDL_FALSE, SDL_MapRGB( loadedSurface->format, 0xE, 0x72, 0x67 ) );

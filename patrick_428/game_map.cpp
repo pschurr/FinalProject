@@ -678,23 +678,35 @@ bool setTiles()
 	}
 	
 
-	if(!gCharTexture.loadFromFile("charSprites.png")){
+	if(!kCharTexture.loadFromFile("knight.png")){
 		printf("Failed to load");
-}
-        cTileClips[0].x=0;
-        cTileClips[0].y=0;
-        cTileClips[0].w=32;
-        cTileClips[0].h=32;
+	}
+	
+        kTileClips[0].x=0;
+        kTileClips[0].y=0;
+        kTileClips[0].w=32;
+        kTileClips[0].h=32;
+	
+	  if(!aCharTexture.loadFromFile("archer.png")){
+                printf("Failed to load");
+	}
 
-	cTileClips[1].x=32;
-        cTileClips[1].y=0;
-        cTileClips[1].w=32;
-        cTileClips[1].h=32;
+	
+        aTileClips[0].x=0;
+        aTileClips[0].y=0;
+        aTileClips[0].w=32;
+        aTileClips[0].h=32;
+	 
 
-	cTileClips[2].x=64;
-        cTileClips[2].y=0;
-        cTileClips[2].w=32;
-        cTileClips[2].h=32;
+	 if(!mCharTexture.loadFromFile("mage.png")){
+                printf("Failed to load");
+	}
+
+        mTileClips[0].x=0;
+        mTileClips[0].y=0;
+        mTileClips[0].w=32;
+        mTileClips[0].h=32;
+
 
 	//Close the file
 	map.close();

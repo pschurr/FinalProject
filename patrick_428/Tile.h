@@ -56,7 +56,9 @@ class Tile
 
                 //Shows the tile
                 void render();
-		void renderChar();
+		void renderArcher();
+		void renderKnight();
+		void renderMage();
 		void set_xpos(int);
 		void set_ypos(int);
 		void set_type(int);
@@ -109,15 +111,15 @@ void Tile::render()
 
 void Tile::renderKnight()
 {
-gCharTexture.render(mBox.x, mBox.y, &kTileClips[0]);
+kCharTexture.render(mBox.x, mBox.y, &kTileClips[0]);
 }
 void Tile::renderArcher()
 {
-gCharTexture.render(mBox.x, mBox.y, &aTileClips[0]);
+aCharTexture.render(mBox.x, mBox.y, &aTileClips[0]);
 }
 void Tile::renderMage()
 {
-gCharTexture.render(mBox.x, mBox.y, &mTileClips[0]);
+mCharTexture.render(mBox.x, mBox.y, &mTileClips[0]);
 }
 
 
