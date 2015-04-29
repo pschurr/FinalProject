@@ -99,7 +99,7 @@ void Tile::render()
 
 void Tile::renderChar()
 {
-gCharTexture.render(mBox.x, mBox.y, &cTileClips[0]);
+gCharTexture.render(mBox.x, mBox.y, &cTileClips[mType]);
 }
 
 

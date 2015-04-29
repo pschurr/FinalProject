@@ -84,9 +84,12 @@ int main( int argc, char* args[] )
 
 			Character* e1=new Knight("enemy1",15*32,12*32,true);
 			Character* e2=new Archer("enemy2",14*32,10*32,true);
+			Character * e3=new Mage("enemy3",13*32, 20*32,true);
+
+
 			enemyVec.push_back(e1);
 			enemyVec.push_back(e2);
-
+			enemyVec.push_back(e3);
 			for(int i=0;i<charVec.size();i++)
 				totalVec.push_back(charVec[i]);
 			for(int i=0;i<enemyVec.size();i++)
@@ -589,13 +592,13 @@ bool setTiles()
         cTileClips[0].w=32;
         cTileClips[0].h=32;
 
-	cTileClips[1].x=32;
-        cTileClips[1].y=32;
+	cTileClips[1].x=110;
+        cTileClips[1].y=110;
         cTileClips[1].w=32;
         cTileClips[1].h=32;
 
-	cTileClips[2].x=32;
-        cTileClips[2].y=32;
+	cTileClips[2].x=60;
+        cTileClips[2].y=60;
         cTileClips[2].w=32;
         cTileClips[2].h=32;
 
