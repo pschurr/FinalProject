@@ -111,12 +111,24 @@ SDL_Texture* newTexture = NULL;
 	if(file=="mage.png"){
                 SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0x5A,0x78,0xD4 ) );
 		}
-		
+	if(file=="mage_en.png"){
+                SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0x0A,0x81,0x80 ) );
+		}
+	
 	if(file=="knight.png"){
-                SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0x5D,0x00,0xA2 ) );
+                SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0x00,0x81,0x15 ) );
 		}
 		
+	if(file=="knight_en.png"){
+                SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0x00,0x81,0x15 ) );
+	}
+
 	if(file=="archer.png"){
+                SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0x10,0x00,0x82 ) );
+		}
+
+
+	if(file=="archer_en.png"){
                 SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0x10,0x00,0x82 ) );
 		}
                 //Create texture from surface pixels
