@@ -25,7 +25,7 @@ Archer::Archer(string name,int x,int y,bool team)
 
 
 void Archer::render(){
-        myTile.renderChar();
+        myTile.renderArcher();
 }
 
 void Archer::display(){
