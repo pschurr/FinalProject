@@ -283,7 +283,7 @@ bool loadMedia()
 	LTexture gSpriteSheetTexture;
 
 
-	if( !gSpriteSheetTexture.loadFromFile( "spritesheet.png" ) )
+	if( !gSpriteSheetTexture.loadFromFile( "animal_crossing.png" ) )
     {
         printf( "Failed to load sprite sheet texture!\n" );
         success = false;
@@ -313,7 +313,7 @@ bool loadMedia()
 	    }
 
 	//Load tile texture
-	if( !gTileTexture.loadFromFile( "spritesheet.png" ) )
+	if( !gTileTexture.loadFromFile( "animal_crossing.png" ) )
 	{
 		printf( "Failed to load tile set texture!\n" );
 		success = false;
@@ -440,23 +440,23 @@ bool setTiles()
 			gTileClips[ TILE_WATER ].w = TILE_WIDTH;
 			gTileClips[ TILE_WATER ].h = TILE_HEIGHT;
 
-			gTileClips[ TILE_ROCK ].x = 0;
-			gTileClips[ TILE_ROCK ].y = 32;
+			gTileClips[ TILE_ROCK ].x = 190;
+			gTileClips[ TILE_ROCK ].y = 0;
 			gTileClips[ TILE_ROCK ].w = TILE_WIDTH;
 			gTileClips[ TILE_ROCK ].h = TILE_HEIGHT;
 
-			gTileClips[ TILE_GRASS ].x = 32;
-			gTileClips[ TILE_GRASS].y = 288;
+			gTileClips[ TILE_GRASS ].x = 0;
+			gTileClips[ TILE_GRASS].y = 0;
 			gTileClips[ TILE_GRASS].w = TILE_WIDTH;
 			gTileClips[ TILE_GRASS].h = TILE_HEIGHT;
 
-			gTileClips[ TILE_SAND ].x = 320;
-			gTileClips[ TILE_SAND ].y = 416;
+			gTileClips[ TILE_SAND ].x = 64;
+			gTileClips[ TILE_SAND ].y = 32;
 			gTileClips[ TILE_SAND ].w = TILE_WIDTH;
 			gTileClips[ TILE_SAND ].h = TILE_HEIGHT;
 		
-			gTileClips[ TILE_GUESS ].x = 0;
-                        gTileClips[ TILE_GUESS ].y = 272;
+			gTileClips[ TILE_GUESS ].x = 224;
+                        gTileClips[ TILE_GUESS ].y = 224;
                         gTileClips[ TILE_GUESS ].w = TILE_WIDTH;
                         gTileClips[ TILE_GUESS ].h = TILE_HEIGHT;
 		}
