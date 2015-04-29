@@ -597,7 +597,9 @@ bool setTiles()
 	}
 	
 
-	gCharTexture.loadFromFile("charSprites.png");
+	if(!gCharTexture.loadFromFile("charSprites.png")){
+		printf("Failed to load");
+}
         cTileClips[0].x=0;
         cTileClips[0].y=0;
         cTileClips[0].w=32;
