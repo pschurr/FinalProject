@@ -16,28 +16,8 @@
 #include "mage.h"
 #include "archer.h"
 #include <vector>
-/*
-//Screen dimension constants
-const int SCREEN_WIDTH = 600;
-const int SCREEN_HEIGHT = 600;
 
-//The dimensions of the level
-const int LEVEL_WIDTH = 1600;
-const int LEVEL_HEIGHT = 800;
 
-//Tile constants
-const int TILE_WIDTH = 32;
-const int TILE_HEIGHT = 32;
-const int TOTAL_TILES =1250;
-const int TOTAL_TILE_SPRITES = 5;
-
-//The different tile sprites
-const int TILE_WATER = 0;
-const int TILE_ROCK = 1;
-const int TILE_GRASS = 2;
-const int TILE_SAND = 3;
-const int TILE_GUESS = 4;
-*/
 //Starts up SDL and creates window
 bool init();
 
@@ -54,31 +34,12 @@ void close();
 
 //Sets tiles from tile map
 bool setTiles();
-/*
-//The window we'll be rendering to
-SDL_Window* gWindow = NULL;
-
-//The window renderer
-SDL_Renderer* gRenderer = NULL;
-
-
-//font
-TTF_Font *gFont = NULL;
-SDL_Rect gSpriteClips[ 4 ];
-LTexture gSpriteSheetTexture;
-//Scene textures
-LTexture gTextTexture;
-LTexture gTileTexture;
-SDL_Rect gTileClips[ TOTAL_TILE_SPRITES ];
-*/
 
 int main( int argc, char* args[] )
 {
 	//The window we'll be rendering to
 	SDL_Window* gWindow = NULL;
 
-	//The window renderer
-	//SDL_Renderer* gRenderer = NULL;
 
 
 	//font
@@ -126,8 +87,6 @@ int main( int argc, char* args[] )
 			enemyVec.push_back(e2);
 			
 			Character* current = NULL;
-                        //Level camera
-                        //SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 
 
 			int turns=5;
@@ -165,39 +124,6 @@ int main( int argc, char* args[] )
                                                 }
 
 					}
-                                        /*if(e.type==SDL_MOUSEBUTTONDOWN){
-                                        	int x,y;
-                                        	SDL_GetMouseState(&x,&y);
-						for(int i=0;i<charVec.size();i++){
-							Character* c=charVec[i];
-							xpos=c->getX()*TILE_WIDTH;
-							ypos=c->getY()*TILE_HEIGHT;
-                                        		if((x>xpos)&&(x<xpos+32)&&(y>ypos)&&(y<ypos+32)){
-								current=c;
-								cout<<"Current character changed"<<endl;
-                                        		}
-                                        	}
-					}
-                                        if(current != NULL && e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_UP){
-                                        	current->moveUp(32);
-						cout<<"Move up"<<endl;
-						ypos-=32;
-                                        }
-                                        if(current != NULL && e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_RIGHT){
-						current->moveDown(32);
-						cout<<"Move right"<<endl;
-                                        	xpos+=32;
-                                        }
-                                        if(current != NULL && e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_DOWN){
-                                        	current->moveLeft(32);
-						cout<<"Move down"<<endl;
-						ypos+=32;
-                                        }
-                                        if(current != NULL && e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_LEFT){
-                                        	current->moveRight(32);
-						cout<<"Move left"<<endl;
-						xpos-=32;
-                                        }*/
 
                                 }
 				if(turns<=turnCount){
@@ -217,9 +143,6 @@ int main( int argc, char* args[] )
                                 Tile temp=*it;
 				temp.render();
                                 }
-				 /*for(std::vector<Character>::iterator it = charVec.begin(); it!=charVec.end(); ++it){
-				*it->render();
-				}*/
 
 				  for(int i=0; i<charVec.size();i++)
 				     {
@@ -506,119 +429,3 @@ bool setTiles()
 	//If the map was loaded fine
 	return tilesLoaded;
 }
-/*
-int main( int argc, char* args[] )
-{
-//The window we'll be rendering to
-SDL_Window* gWindow = NULL;
-
-//The window renderer
-SDL_Renderer* gRenderer = NULL;
-
-
-//font
-TTF_Font *gFont = NULL;
-SDL_Rect gSpriteClips[ 4 ];
-LTexture gSpriteSheetTexture;
-//Scene textures
-LTexture gTextTexture;
-LTexture gTileTexture;
-SDL_Rect gTileClips[ TOTAL_TILE_SPRITES ];
-
-	//Start up SDL and create window
-	if( !init() )
-	{
-		printf( "Failed to initialize!\n" );
-	}
-	else
-	{
-		//The level tiles
-		Tile* tileSet[ TOTAL_TILES ];
-
-		//Load media
-		if( !loadMedia( tileSet ) )
-		{
-			printf( "Failed to load media!\n" );
-		}
-		else
-		{	
-			//Main loop flag
-			bool quit = false;
-
-			//Event handler
-			SDL_Event e;
-			int xpos=0;
-			int ypos = 0;
-
-			//Level camera
-			SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
-
-			//While application is running
-			while( !quit )
-			{
-				//Handle events on queue
-				while( SDL_PollEvent( &e ) != 0 )
-				{
-					//User requests quit
-					if( e.type == SDL_QUIT )
-					{
-						quit = true;
-					}
-					if(e.type==SDL_MOUSEBUTTONDOWN){
-					int x,y;
-					SDL_GetMouseState(&x,&y);
-					if((x>xpos)&&(x<xpos+32)&&(y>ypos)&&(y<ypos+32)){
-					xpos+=32;
-					ypos+=32;
-					}
-					}
-					if(e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_UP){
-					ypos-=32;
-					}
-					if(e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_RIGHT){
-					xpos+=32;
-					}
-					if(e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_DOWN){
-					ypos+=32;
-					}
-					if(e.type==SDL_KEYDOWN && e.key.keysym.sym == SDLK_LEFT){
-					xpos-=32;
-					}
-
-
-				}
-
-
-
-				
-				//Clear screen
-				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-				SDL_RenderClear( gRenderer );
-				
-
-				
-				for( int i = 0; i < TOTAL_TILES; ++i )
-				{
-					tileSet[ i ]->render( camera );
-				}
-				
-				//gSpriteSheetTexture.renderSprite( 0, 0, &gSpriteClips[ 0 ] );
-
-				gSpriteSheetTexture.render(xpos,ypos, &gSpriteClips[0]);	
-				
-				// render text box
-				 gTextTexture.render(5,500);
-
-
-				//Update screen
-				SDL_RenderPresent( gRenderer );
-			}
-		}
-		
-		//Free resources and close SDL
-		close( tileSet );
-	}
-
-	return 0;
-}*/
-
