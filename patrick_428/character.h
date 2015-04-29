@@ -25,6 +25,7 @@ class Character{
 		int getDefensePwr();
 		int getRange();
 		void setOnMe(bool);
+		void setCanMove(bool,bool,bool,bool);
 		void moveUp(int);
 		void moveDown(int);
 		void moveLeft(int);
@@ -47,6 +48,7 @@ class Character{
 		vector<Character*> charsInRange; //all other characters that can be attacked
 		string mName;		
 		bool onMe;
+		bool canMove[4];
 };
 
 Character::Character(){
@@ -64,6 +66,10 @@ Character::Character(){
 	myTile.set_type(4);
 	mName = "default";
 	onMe = false;
+	canMove[0]=true;
+	canMove[1]=true;
+	canMove[2]=true;
+	canMove[3]=true;
 }
 
 Character::Character(string name,int x,int y,int h,int atk,int def,int r,bool team){
@@ -81,6 +87,10 @@ Character::Character(string name,int x,int y,int h,int atk,int def,int r,bool te
 	myTile.set_xpos(xloc);
 	myTile.set_ypos(yloc);
 	myTile.set_type(myType);
+        canMove[0]=true;
+        canMove[1]=true;
+        canMove[2]=true;
+        canMove[3]=true;
 }
 
 int Character::getX(){return xloc;}
@@ -93,6 +103,13 @@ int Character::getRange(){return range;}
 
 void Character::setOnMe(bool isOnMe){
 	onMe=isOnMe;
+}
+
+void Character::setCanMove(bool up,bool down,bool left,bool right){
+	canMove[0]=up;
+	canMove[1]=down;
+	canMove[2]=left;
+	canMove[3]=right;
 }
 
 void Character::moveUp(int dist){
@@ -146,22 +163,37 @@ int Character::handleEvent(SDL_Event e){
 
 	if(e.type==SDL_KEYDOWN){
 		if(onMe==true){
+			bool moved=false;
+			cout<<"Can move: "<<canMove[0]<<canMove[1]<<canMove[2]<<canMove[3]<<endl;
 			switch(e.key.keysym.sym){
 				case SDLK_DOWN:
-					yloc+=32;
-					break;
+					if(canMove[1]){
+						yloc+=32;
+						moved=true;
+						break;
+					}
 				case SDLK_UP:
-					yloc-=32;
-					break;
+					if(canMove[0]){
+						yloc-=32;
+						moved=true;
+						break;
+					}
 				case SDLK_LEFT:
-                                        xloc-=32;
-                                        break;
+					if(canMove[2]){
+                                        	xloc-=32;
+						moved=true;
+                                        	break;
+					}
 				case SDLK_RIGHT:
-                                        xloc+=32;
-                                        break;
+					if(canMove[3]){
+                                        	xloc+=32;
+						moved=true;
+                                        	break;
+					}
 
 				}
-			status=1;
+			if(moved)
+				status=1;
 		}
 	
 	}	

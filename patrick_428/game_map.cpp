@@ -25,6 +25,7 @@ std::vector<Tile> mapVec;
 //void renderMap(vector<Tile> map);
 std::vector<Character *> charVec;
 std::vector<Character *> enemyVec;
+std::vector<Character *> totalVec;
 //Loads media
 bool loadMedia();
 
@@ -85,6 +86,11 @@ int main( int argc, char* args[] )
 			Character* e2=new Archer("enemy2",14*32,10*32,true);
 			enemyVec.push_back(e1);
 			enemyVec.push_back(e2);
+
+			for(int i=0;i<charVec.size();i++)
+				totalVec.push_back(charVec[i]);
+			for(int i=0;i<enemyVec.size();i++)
+				totalVec.push_back(enemyVec[i]);
 			
 			Character* current = NULL;
 
@@ -104,7 +110,40 @@ int main( int argc, char* args[] )
                                         {
                                                 quit = true;
                                         }
-					if(playerTurn){    
+					//Check characters in range
+					for(int i=0;i<charVec.size()-1;i++){
+						for(int j=i+1;j<charVec.size();j++){
+							int xdiff=charVec[i]->getX()-charVec[j]->getX();
+							int ydiff=charVec[i]->getY()-charVec[j]->getY();
+							bool up=true;
+							bool down=true;
+							bool left=true;
+							bool right=true;
+							if((xdiff<64 && xdiff>-64) && (ydiff<64 && ydiff>-64)){
+								if(ydiff>0)
+									up=false;
+								else if(ydiff<0)
+									down=false;
+								else if(xdiff>0)
+									left=false;
+								else if(xdiff<0)
+									right=false;
+							}
+							/*for(int k=0;k<charVec.size();k++)
+								if(charVec[k]==totalVec[i]){
+									charVec[k]->setCanMove(up,down,left,right);
+									cout<<"Match found"<<endl;
+								}
+							for(int k=0;k<enemyVec.size();k++)
+								if(enemyVec[k]==totalVec[i]){
+									cout<<"Match found"<<endl;
+									enemyVec[k]->setCanMove(up,down,left,right);
+								}*/
+							charVec[i]->setCanMove(up,down,left,right);
+						}
+					}
+
+					if(playerTurn){
 						for(int i=0;i<charVec.size();i++){
                                                 	Character* c=charVec[i];
 							s = c-> handleEvent(e);
