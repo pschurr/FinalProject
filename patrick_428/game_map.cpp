@@ -150,6 +150,27 @@ int main( int argc, char* args[] )
 								}*/
 							//totalVec[j]->setCanMove(up,down,left,right);
 							charVec[j]->setCanMove(up2,down2,left2,right2);
+                                                for(int j=i+1;j<enemyVec.size();j++){
+                                                        int xdiff=enemyVec[i]->getX()-enemyVec[j]->getX();
+                                                        int ydiff=enemyVec[i]->getY()-enemyVec[j]->getY();
+                                                        if((xdiff<64 && xdiff>-64) && (ydiff<64 && ydiff>-64)){
+                                                                if(ydiff>0){
+                                                                        up=false;
+                                                                        down2=false;
+                                                                }else if(ydiff<0){
+                                                                        down=false;
+                                                                        up2=false;
+                                                                }else if(xdiff>0){
+                                                                        left=false;
+                                                                        right2=false;
+                                                                }else if(xdiff<0){
+                                                                        right=false;
+                                                                        left2=false;
+                                                                }
+                                                        }
+                                                        enemyVec[j]->setCanMove(up2,down2,left2,right2);
+                                                }
+
 						}
 						charVec[i]->setCanMove(up,down,left,right);
 					}
@@ -214,6 +235,27 @@ int main( int argc, char* args[] )
                                                                 }
                                                         }
                                                         enemyVec[j]->setCanMove(up2,down2,left2,right2);
+						}
+                                                for(int j=i+1;j<charVec.size();j++){
+                                                        int xdiff=charVec[i]->getX()-charVec[j]->getX();
+                                                        int ydiff=charVec[i]->getY()-charVec[j]->getY();
+                                                        if((xdiff<64 && xdiff>-64) && (ydiff<64 && ydiff>-64)){
+                                                                if(ydiff>0){
+                                                                        up=false;
+                                                                        down2=false;
+                                                                }else if(ydiff<0){
+                                                                        down=false;
+                                                                        up2=false;
+                                                                }else if(xdiff>0){
+                                                                        left=false;
+                                                                        right2=false;
+                                                                }else if(xdiff<0){
+                                                                        right=false;
+                                                                        left2=false;
+                                                                }
+                                                        }
+                                                        charVec[j]->setCanMove(up2,down2,left2,right2);
+
                                                 }
                                                 enemyVec[i]->setCanMove(up,down,left,right);
                                         }
