@@ -18,17 +18,19 @@ class Mage:public Character{
 
 };
 
+// Instantiate mage with name, coordinates, and stas
 Mage::Mage(string name,int x,int y,bool team)
         :Character(name,0,x,y,100,80,80,5,team){
 
 }
 
 
-
+// Determine which mage sprite display depending what team mage is on
 void Mage::render(){
         myTile.renderMage(isEnemy);
 }
 
+// General information displayed to help gameflow
 void Mage::display(){
         cout<<"Selected character: "<<mName<<endl;
         cout<<"Class: Mage"<<endl;
@@ -36,6 +38,7 @@ void Mage::display(){
 
 }
 
+// Healing ability to increase a character's health by 15 points
 void Mage::heal(Character* other){
 	if(other==this)
 		incrHealth(15);
