@@ -193,7 +193,8 @@ int Character::handleEvent(SDL_Event e){
 						moved=true;
                                         	break;
 					}
-
+				case SDLK_SPACE:
+					status=2;
 				}
 			if(moved)
 				status=1;

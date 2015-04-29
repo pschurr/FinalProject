@@ -74,17 +74,17 @@ int main( int argc, char* args[] )
                         int ypos=0;
 
 			//Instantiate player 1 characters
-			Character* c1=new Knight("brock",32,32,false);
-                        Character* c2=new Knight("marry",64,64,false);
-                        Character* c3=new Archer("john",96,96,false);
+			Character* c1=new Knight("brock",32,32,true);
+                        Character* c2=new Knight("marry",64,64,true);
+                        Character* c3=new Archer("john",96,96,true);
                         charVec.push_back(c1);
                         charVec.push_back(c2);
                         charVec.push_back(c3);
 
 			//Instantiate player 2 characters
-			Character* e1=new Knight("enemy1",15*32,12*32,true);
-			Character* e2=new Archer("enemy2",14*32,10*32,true);
-			Character * e3=new Mage("enemy3",13*32, 20*32,true);
+			Character* e1=new Knight("enemy1",15*32,12*32,false);
+			Character* e2=new Archer("enemy2",14*32,10*32,false);
+			Character* e3=new Mage("enemy3",13*32, 20*32,false);
 			enemyVec.push_back(e1);
 			enemyVec.push_back(e2);
 			enemyVec.push_back(e3);
@@ -208,7 +208,7 @@ int main( int argc, char* args[] )
 						for(int i=0;i<charVec.size();i++){
                                                 	Character* c=charVec[i];
 							//Key down
-							if(e.key.keysym.sym==SDLK_SPACE){
+							/*if(e.key.keysym.sym==SDLK_SPACE){
 								cout<<"Click on a character"<<endl;
 								int mousex, mousey;
 								if(SDL_PollEvent(&e) == SDL_MOUSEBUTTONDOWN){
@@ -220,11 +220,17 @@ int main( int argc, char* args[] )
 									}
 								}
 								
-							}
+							}*/
 							s = c-> handleEvent(e);
 							if(s==1){
 								turnCount++;
 								cout<<"turn used"<<endl;
+							}else if(s==2){
+								//Wait for mouse click
+								SDL_WaitEvent(&e);
+								if(e.type==SDL_MOUSEBUTTONDOWN){
+									cout<<"Mouse clicked"<<endl;
+								}
 							}
 						}
 					}else{
@@ -575,8 +581,8 @@ bool setTiles()
 	
         kEnTileClips[0].x=0;
         kEnTileClips[0].y=0;
-        kEnTileClips[0].w=32;
-        kEnTileClips[0].h=32;
+        kEnTileClips[0].w=30;
+        kEnTileClips[0].h=33;
 	
 	  if(!aEnCharTexture.loadFromFile("archer_en.png")){
                 printf("Failed to load");
@@ -585,8 +591,8 @@ bool setTiles()
 	
         aEnTileClips[0].x=0;
         aEnTileClips[0].y=0;
-        aEnTileClips[0].w=32;
-        aEnTileClips[0].h=32;
+        aEnTileClips[0].w=30;
+        aEnTileClips[0].h=35;
 	 
 
 	 if(!mEnCharTexture.loadFromFile("mage_en.png")){
@@ -595,8 +601,8 @@ bool setTiles()
 
         mEnTileClips[0].x=0;
         mEnTileClips[0].y=0;
-        mEnTileClips[0].w=32;
-        mEnTileClips[0].h=32;
+        mEnTileClips[0].w=36;
+        mEnTileClips[0].h=38;
 
 
 
