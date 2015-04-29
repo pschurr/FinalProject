@@ -73,21 +73,34 @@ int main( int argc, char* args[] )
                         int xpos=0;
                         int ypos=0;
 
-			//Instantiate player 1 characters
-			Character* c1=new Knight("brock",32,32,true);
-                        Character* c2=new Mage("marry",64,64,true);
-                        Character* c3=new Archer("john",96,96,true);
+
+
+			   Character* c1=new Archer("brock",12*32,64,true);
+                        Character* c2=new Mage("marry",14*32,64,true);
+                        Character* c3=new Knight("john",16*32,64,true);
+                        Character* c4=new Knight("misty",18*32, 64, true);
+                        Character* c5=new Mage("lance", 20*32, 64, true);
+                        Character* c6=new Archer("archer", 22*32, 64, true);
                         charVec.push_back(c1);
                         charVec.push_back(c2);
                         charVec.push_back(c3);
+                        charVec.push_back(c4);
+                        charVec.push_back(c5);
+                        charVec.push_back(c6);
 
-			//Instantiate player 2 characters
-			Character* e1=new Knight("enemy1",15*32,12*32,false);
-			Character* e2=new Archer("enemy2",14*32,10*32,false);
-			Character* e3=new Mage("enemy3",13*32, 20*32,false);
-			enemyVec.push_back(e1);
-			enemyVec.push_back(e2);
-			enemyVec.push_back(e3);
+                        //Instantiate player 2 characters
+                        Character* e1=new Archer("jesse",12*32,28*32,false);
+                        Character* e2=new Mage("james",14*32,28*32,false);
+                        Character* e3=new Knight("giovanni",16*32, 28*32,false);
+                        Character* e4=new Knight("red", 18*32, 28*32, false);
+                        Character* e5=new Mage("meowth", 20*32, 28*32, false);
+                        Character* e6=new Archer("blue", 22*32, 28*32, false);
+                        enemyVec.push_back(e1);
+                        enemyVec.push_back(e2);
+                        enemyVec.push_back(e3);
+                        enemyVec.push_back(e4);
+                        enemyVec.push_back(e5);
+                        enemyVec.push_back(e6);
 			
 			//Active character controlled by player
 			Character* current = NULL;
