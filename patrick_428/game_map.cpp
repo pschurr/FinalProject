@@ -112,36 +112,113 @@ int main( int argc, char* args[] )
                                         }
 					//Check characters in range
 					for(int i=0;i<charVec.size()-1;i++){
+						bool up=true;
+						bool down=true;
+						bool left=true;
+						bool right=true;
+                                                bool up2=true;
+                                                bool down2=true;
+                                                bool left2=true;
+                                                bool right2=true;
+
 						for(int j=i+1;j<charVec.size();j++){
 							int xdiff=charVec[i]->getX()-charVec[j]->getX();
 							int ydiff=charVec[i]->getY()-charVec[j]->getY();
-							bool up=true;
-							bool down=true;
-							bool left=true;
-							bool right=true;
 							if((xdiff<64 && xdiff>-64) && (ydiff<64 && ydiff>-64)){
-								if(ydiff>0)
+								if(ydiff>0){
 									up=false;
-								else if(ydiff<0)
+									down2=false;
+								}else if(ydiff<0){
 									down=false;
-								else if(xdiff>0)
+									up2=false;
+								}else if(xdiff>0){
 									left=false;
-								else if(xdiff<0)
+									right2=false;
+								}else if(xdiff<0){
 									right=false;
+									left2=false;
+								}
 							}
+
 							/*for(int k=0;k<charVec.size();k++)
 								if(charVec[k]==totalVec[i]){
 									charVec[k]->setCanMove(up,down,left,right);
-									cout<<"Match found"<<endl;
 								}
 							for(int k=0;k<enemyVec.size();k++)
 								if(enemyVec[k]==totalVec[i]){
-									cout<<"Match found"<<endl;
 									enemyVec[k]->setCanMove(up,down,left,right);
 								}*/
-							charVec[i]->setCanMove(up,down,left,right);
+							//totalVec[j]->setCanMove(up,down,left,right);
+							charVec[j]->setCanMove(up2,down2,left2,right2);
 						}
+						charVec[i]->setCanMove(up,down,left,right);
 					}
+                                        /*for(int i=0;i<charVec.size()-1;i++){
+                                                bool up=true;
+                                                bool down=true;
+                                                bool left=true;
+                                                bool right=true;
+                                                bool up2=true;
+                                                bool down2=true;
+                                                bool left2=true;
+                                                bool right2=true;
+
+                                                for(int j=i+1;j<enemyVec.size();j++){
+                                                        int xdiff=charVec[i]->getX()-enemyVec[j]->getX();
+                                                        int ydiff=charVec[i]->getY()-enemyVec[j]->getY();
+                                                        if((xdiff<64 && xdiff>-64) && (ydiff<64 && ydiff>-64)){
+                                                                if(ydiff>0){
+                                                                        up=false;
+                                                                        down2=false;
+                                                                }else if(ydiff<0){
+                                                                        down=false;
+                                                                        up2=false;
+                                                                }else if(xdiff>0){
+                                                                        left=false;
+                                                                        right2=false;
+                                                                }else if(xdiff<0){
+                                                                        right=false;
+                                                                        left2=false;
+                                                                }
+                                                        }
+                                                        enemyVec[j]->setCanMove(up2,down2,left2,right2);
+                                                }
+                                                charVec[i]->setCanMove(up,down,left,right);
+                                        }*/
+                                        for(int i=0;i<enemyVec.size()-1;i++){
+                                                bool up=true;
+                                                bool down=true;
+                                                bool left=true;
+                                                bool right=true;
+                                                bool up2=true;
+                                                bool down2=true;
+                                                bool left2=true;
+                                                bool right2=true;
+
+                                                for(int j=i+1;j<enemyVec.size();j++){
+                                                        int xdiff=enemyVec[i]->getX()-enemyVec[j]->getX();
+                                                        int ydiff=enemyVec[i]->getY()-enemyVec[j]->getY();
+                                                        if((xdiff<64 && xdiff>-64) && (ydiff<64 && ydiff>-64)){
+                                                                if(ydiff>0){
+                                                                        up=false;
+                                                                        down2=false;
+                                                                }else if(ydiff<0){
+                                                                        down=false;
+                                                                        up2=false;
+                                                                }else if(xdiff>0){
+                                                                        left=false;
+                                                                        right2=false;
+                                                                }else if(xdiff<0){
+                                                                        right=false;
+                                                                        left2=false;
+                                                                }
+                                                        }
+                                                        enemyVec[j]->setCanMove(up2,down2,left2,right2);
+                                                }
+                                                enemyVec[i]->setCanMove(up,down,left,right);
+                                        }
+
+
 
 					if(playerTurn){
 						for(int i=0;i<charVec.size();i++){
