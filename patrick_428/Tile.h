@@ -29,12 +29,22 @@ const int TILE_GUESS = 4;
 
 
 //Scene textures
-LTexture gCharTexture;
+LTexture kCharTexture;
+
+LTexture aCharTexture;
+
+LTexture mCharTexture;
+
 LTexture gFontTexture;
 LTexture gTextTexture;
 LTexture gTileTexture;
 SDL_Rect gTileClips[ TOTAL_TILE_SPRITES ];
-SDL_Rect cTileClips[3];
+SDL_Rect kTileClips[1];
+
+SDL_Rect aTileClips[1];
+
+SDL_Rect mTileClips[1];
+
 
 class Tile
 {
@@ -97,9 +107,17 @@ void Tile::render()
 }
 
 
-void Tile::renderChar()
+void Tile::renderKnight()
 {
-gCharTexture.render(mBox.x, mBox.y, &cTileClips[mType]);
+gCharTexture.render(mBox.x, mBox.y, &kTileClips[0]);
+}
+void Tile::renderArcher()
+{
+gCharTexture.render(mBox.x, mBox.y, &aTileClips[0]);
+}
+void Tile::renderMage()
+{
+gCharTexture.render(mBox.x, mBox.y, &mTileClips[0]);
 }
 
 

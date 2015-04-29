@@ -26,7 +26,7 @@ Mage::Mage(string name,int x,int y,bool team)
 
 
 void Mage::render(){
-        myTile.renderChar();
+        myTile.renderMage();
 }
 
 void Mage::display(){
