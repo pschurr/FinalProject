@@ -75,7 +75,7 @@ int main( int argc, char* args[] )
 
 			//Instantiate player 1 characters
 			Character* c1=new Knight("brock",32,32,true);
-                        Character* c2=new Knight("marry",64,64,true);
+                        Character* c2=new Mage("marry",64,64,true);
                         Character* c3=new Archer("john",96,96,true);
                         charVec.push_back(c1);
                         charVec.push_back(c2);
@@ -227,10 +227,11 @@ int main( int argc, char* args[] )
 								cout<<"turn used"<<endl;
 							}else if(s==2){
 								//Wait for mouse click
+								cout<<"Click on a character"<<endl;
 								SDL_WaitEvent(&e);
-								if(e.type==SDL_MOUSEBUTTONDOWN){
+								//if(e.type==SDL_MOUSEBUTTONDOWN){
 									cout<<"Mouse clicked"<<endl;
-								}
+								//}
 							}
 						}
 					}else{
