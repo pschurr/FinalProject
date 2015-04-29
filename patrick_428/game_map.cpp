@@ -347,6 +347,15 @@ int main( int argc, char* args[] )
 					for(int i=0;i<enemyVec.size();i++)
 						enemyVec[i]->setOnMe(false);
 				}
+				//Determine if game has ended
+				if(charVec.size()==0){
+					cout<<"Player 2 wins!"<<endl;
+					quit=true;
+				}else if(enemyVec.size()==0){
+					cout<<"Player 1 wins!"<<endl;
+					quit=true;
+				}
+				
                                 //Clear screen
                                 SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
                                 SDL_RenderClear( gRenderer );
