@@ -13,6 +13,8 @@
 #include "Tile.h"
 #include "character.h"
 #include "knight.h"
+#include "mage.h"
+#include "archer.h"
 #include <vector>
 /*
 //Screen dimension constants
