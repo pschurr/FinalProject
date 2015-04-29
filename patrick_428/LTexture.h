@@ -168,8 +168,8 @@ bool LTexture::loadFromRenderedText( std::string textureText, SDL_Color textColo
                                  {
                             printf( "Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError());                                                                                                                                }
           else                                                                                                                                    {                                                                                                                      //Get image dimensions
-           mWidth = textSurface->w;
-         mHeight = textSurface->h;
+           mWidth = 300;
+         mHeight = 50;
                 }
                  SDL_FreeSurface( textSurface );
 

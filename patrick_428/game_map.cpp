@@ -372,11 +372,23 @@ int main( int argc, char* args[] )
 				for(int i=0;i<enemyVec.size();i++){
 					enemyVec[i]->render();
 				}
+				
+				// need to make this section functional on if chracter is clicked, then read their text and draw to screen
+				// also need to update size of maps!
 
-                                gSpriteSheetTexture.render(xpos,ypos, &gSpriteClips[0]);      
+				
                                 // render text box
-                                 gTextTexture.render(5,500);
-
+				SDL_Color Black = {0,0,0};
+				SDL_Color White = {255,255,255};
+				LTexture nameBox;
+				LTexture typeBox;
+				LTexture healthBox;
+				nameBox.loadFromRenderedText("Name:",White,Black);
+				typeBox.loadFromRenderedText("Type: ",White,Black);
+				healthBox.loadFromRenderedText("Health:",White,Black);
+				nameBox.render(0,800);
+				typeBox.render(0,850);
+				healthBox.render(0,900);
                                 //Update screen
                                 SDL_RenderPresent( gRenderer );
                         }
