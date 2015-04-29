@@ -7,17 +7,17 @@
 #include <SDL2/SDL_image.h>
 #include<vector>
 //Screen dimension constants
-const int SCREEN_WIDTH = 1200; //600;
-const int SCREEN_HEIGHT = 1200; //600;
+const int SCREEN_WIDTH = 1152; //600;
+const int SCREEN_HEIGHT = 960; //600;
 
 //The dimensions of the level
-const int LEVEL_WIDTH = 1600;
-const int LEVEL_HEIGHT = 800;
+const int LEVEL_WIDTH = 1152;
+const int LEVEL_HEIGHT = 960;
 
 //Tile constants
 const int TILE_WIDTH = 32;
 const int TILE_HEIGHT = 32;
-const int TOTAL_TILES =1250;
+const int TOTAL_TILES =1080;
 const int TOTAL_TILE_SPRITES = 5;
 
 //The different tile sprites
