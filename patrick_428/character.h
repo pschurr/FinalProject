@@ -15,10 +15,11 @@ class Character{
 		Character();
 		Character(string,int,int,int,int,int,int,bool);
 		virtual void render();
-		void handleEvent(SDL_Event);
+		int handleEvent(SDL_Event);
 		int getX();
 		int getY();
 		int getHealth();
+		int getMaxHealth();
 		int getAttackPwr();
 		int getDefensePwr();
 		int getRange();
@@ -35,6 +36,7 @@ class Character{
 		int myType;
 		int yloc;
 		int health;
+		int maxHealth;
 		int attackPwr;
 		int defensePwr;
 		int range; //distance from which character can attack
@@ -49,7 +51,8 @@ Character::Character(){
 	xloc = 0;
 	yloc = 0;
 	myType=0;
-	health=100;
+	maxHealth=100;
+	health=maxHealth;
 	attackPwr=100;
 	defensePwr=100;
 	range=5;
@@ -67,7 +70,8 @@ Character::Character(string name,int x,int y,int h,int atk,int def,int r,bool te
 	xloc=x;
 	yloc=y;
 	myType=4;
-	health=h;
+	maxHealth=h;
+	health=maxHealth;
 	attackPwr=atk;
 	defensePwr=def;
 	range=r;
@@ -80,6 +84,7 @@ Character::Character(string name,int x,int y,int h,int atk,int def,int r,bool te
 int Character::getX(){return xloc;}
 int Character::getY(){return yloc;}
 int Character::getHealth(){return health;}
+int Character::getMaxHealth(){return maxHealth;}
 int Character::getAttackPwr(){return attackPwr;}
 int Character::getDefensePwr(){return defensePwr;}
 int Character::getRange(){return range;}
@@ -115,13 +120,15 @@ void Character::decrHealth(int amt){
 void Character::render(){
 }
 
-void Character::handleEvent(SDL_Event e){
+int Character::handleEvent(SDL_Event e){
+	int status=0;
 	if(e.type==SDL_MOUSEBUTTONDOWN){
-	int mousex,mousey;
+		int mousex,mousey;
 	SDL_GetMouseState(&mousex,&mousey);
 
 		if((mousex>xloc)&&(mousex<xloc+32)&&(mousey>yloc)&&(mousey<yloc+32)){
-			std::cout<<"Chracter is now" << mName<<endl;
+			std::cout<<"Selected character: " << mName<<endl;
+			std::cout<<"Health: "<<health<<"/"<<maxHealth<<endl;
 			onMe=true;
 			}
 		else{
@@ -147,11 +154,13 @@ void Character::handleEvent(SDL_Event e){
                                         break;
 
 				}
-		}		
+			status=1;
+		}
+	
 	}	
-myTile.set_xpos(xloc);
-myTile.set_ypos(yloc);
-
+	myTile.set_xpos(xloc);
+	myTile.set_ypos(yloc);
+	return status;
 }
 
 void Character::attack(Character * other){

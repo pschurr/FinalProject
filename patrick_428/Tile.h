@@ -7,8 +7,8 @@
 #include <SDL2/SDL_image.h>
 #include<vector>
 //Screen dimension constants
-const int SCREEN_WIDTH = 600;
-const int SCREEN_HEIGHT = 600;
+const int SCREEN_WIDTH = 1200; //600;
+const int SCREEN_HEIGHT = 1200; //600;
 
 //The dimensions of the level
 const int LEVEL_WIDTH = 1600;

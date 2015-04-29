@@ -42,6 +42,7 @@ bool init();
 std::vector<Tile> mapVec;
 //void renderMap(vector<Tile> map);
 std::vector<Character *> charVec;
+std::vector<Character *> enemyVec;
 //Loads media
 bool loadMedia();
 
@@ -108,7 +109,7 @@ int main( int argc, char* args[] )
                         //Event handler
                         SDL_Event e;
                         int xpos=0;
-                         int ypos = 0;
+                        int ypos = 0;
 
 			Character* c1=new Knight("brock",32,32,false);
                         Character* c2=new Knight("marry",64,64,false);
@@ -116,11 +117,21 @@ int main( int argc, char* args[] )
                         charVec.push_back(c1);
                         charVec.push_back(c2);
                         charVec.push_back(c3);
+
+			Character* e1=new Knight("enemy1",15*32,12*32,true);
+			Character* e2=new Knight("enemy2",14*32,10*32,true);
+			enemyVec.push_back(e1);
+			enemyVec.push_back(e2);
 			
 			Character* current = NULL;
                         //Level camera
                         //SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 
+
+			int turns=5;
+			int turnCount=0;
+			int s;
+			bool playerTurn=true;
                         //While application is running
                         while( !quit )
                         {
@@ -132,10 +143,25 @@ int main( int argc, char* args[] )
                                         {
                                                 quit = true;
                                         }
-					    
-					for(int i=0;i<charVec.size();i++){
-                                                 Character* c=charVec[i];
-						 c-> handleEvent(e);
+					if(playerTurn){    
+						for(int i=0;i<charVec.size();i++){
+                                                	Character* c=charVec[i];
+							s = c-> handleEvent(e);
+							if(s==1){
+								turnCount++;
+								cout<<"turn used"<<endl;
+							}
+						}
+					}else{
+						for(int i=0;i<enemyVec.size();i++){
+                                                	Character* c=enemyVec[i];
+                                                        s = c-> handleEvent(e);
+                                                        if(s==1){
+                                                                turnCount++;
+                                                                cout<<"turn used"<<endl;
+                                                        }
+                                                }
+
 					}
                                         /*if(e.type==SDL_MOUSEBUTTONDOWN){
                                         	int x,y;
@@ -172,6 +198,12 @@ int main( int argc, char* args[] )
                                         }*/
 
                                 }
+				if(turns<=turnCount){
+					cout<<"Out of turns"<<endl;
+					turnCount=0;
+					playerTurn=!playerTurn;
+					
+				}
                                 //Clear screen
                                 SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
                                 SDL_RenderClear( gRenderer );
@@ -188,6 +220,9 @@ int main( int argc, char* args[] )
 				     {
        					charVec[i]->render();
 					 }
+				for(int i=0;i<enemyVec.size();i++){
+					enemyVec[i]->render();
+				}
 
                                 gSpriteSheetTexture.render(xpos,ypos, &gSpriteClips[0]);      
                                 // render text box
