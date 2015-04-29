@@ -716,6 +716,36 @@ bool setTiles()
         mTileClips[0].w=32;
         mTileClips[0].h=32;
 
+	if(!kEnCharTexture.loadFromFile("knight_en.png")){
+		printf("Failed to load");
+	}
+	
+        kEnTileClips[0].x=0;
+        kEnTileClips[0].y=0;
+        kEnTileClips[0].w=32;
+        kEnTileClips[0].h=32;
+	
+	  if(!aEnCharTexture.loadFromFile("archer_en.png")){
+                printf("Failed to load");
+	}
+
+	
+        aEnTileClips[0].x=0;
+        aEnTileClips[0].y=0;
+        aEnTileClips[0].w=32;
+        aEnTileClips[0].h=32;
+	 
+
+	 if(!mEnCharTexture.loadFromFile("mage_en.png")){
+                printf("Failed to load");
+	}
+
+        mEnTileClips[0].x=0;
+        mEnTileClips[0].y=0;
+        mEnTileClips[0].w=32;
+        mEnTileClips[0].h=32;
+
+
 
 	//Close the file
 	map.close();

@@ -1,7 +1,7 @@
 //Tile.h
 #ifndef TILE_H
 #define TILE_H
-
+#include<iostream>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -31,9 +31,12 @@ const int TILE_GUESS = 4;
 //Scene textures
 LTexture kCharTexture;
 
+LTexture kEnCharTexture;
 LTexture aCharTexture;
+LTexture aEnCharTexture;
 
 LTexture mCharTexture;
+LTexture mEnCharTexture;
 
 LTexture gFontTexture;
 LTexture gTextTexture;
@@ -44,6 +47,9 @@ SDL_Rect kTileClips[1];
 SDL_Rect aTileClips[1];
 
 SDL_Rect mTileClips[1];
+SDL_Rect mEnTileClips[1];
+SDL_Rect aEnTileClips[1];
+SDL_Rect kEnTileClips[1];
 
 
 class Tile
@@ -111,24 +117,27 @@ void Tile::render()
 
 void Tile::renderKnight(bool isEne)
 {
-if(!isEne)
+if(!isEne){
 kCharTexture.render(mBox.x, mBox.y, &kTileClips[0]);
-else
-kCharTexture.render(mBox.x, mBox.y, &kEnTileClips[0]);
+}
+else{
+kEnCharTexture.render(mBox.x, mBox.y, &kEnTileClips[0]);
+std::cout<<"should render enemy"<<std::endl;
+}
 }
 void Tile::renderArcher(bool isEne)
 {
 if(!isEne)
 aCharTexture.render(mBox.x, mBox.y, &aTileClips[0]);
 else
-aCharTexture.render(mBox.x, mBox.y, &aEnTileClips[0]);
+aEnCharTexture.render(mBox.x, mBox.y, &aEnTileClips[0]);
 }
 void Tile::renderMage(bool isEne)
 {
 if(!isEne)
 mCharTexture.render(mBox.x, mBox.y, &mTileClips[0]);
 else
-mCharTexture.render(mBox.x, mBox.y, &mEnTileClips[0]);
+mEnCharTexture.render(mBox.x, mBox.y, &mEnTileClips[0]);
 
 }
 
