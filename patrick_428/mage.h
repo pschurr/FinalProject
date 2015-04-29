@@ -11,7 +11,7 @@ using namespace std;
 class Mage:public Character{
         public:
                 Mage(string,int,int,bool);
-                virtual void render();
+                virtual void render(bool);
 		virtual void display();
 		void heal(Character*);
         private:
@@ -25,8 +25,8 @@ Mage::Mage(string name,int x,int y,bool team)
 
 
 
-void Mage::render(){
-        myTile.renderMage();
+void Mage::render(bool isEne){
+        myTile.renderMage(isEne);
 }
 
 void Mage::display(){

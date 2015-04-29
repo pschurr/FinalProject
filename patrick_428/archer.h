@@ -11,7 +11,7 @@ using namespace std;
 class Archer:public Character{
         public:
                 Archer(string,int,int,bool);
-                virtual void render();
+                virtual void render(bool);
 		virtual void display();
         private:
 
@@ -24,8 +24,8 @@ Archer::Archer(string name,int x,int y,bool team)
 
 
 
-void Archer::render(){
-        myTile.renderArcher();
+void Archer::render(bool isEne){
+        myTile.renderArcher(isEne);
 }
 
 void Archer::display(){

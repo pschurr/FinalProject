@@ -11,7 +11,7 @@ class Knight:public Character{
 	public:
 		Knight(string,int,int,bool);
 //		Knight(int,int,int,int,int,int,bool);
-		virtual void render();
+		virtual void render(bool);
 		virtual void display();
 		bool findEnemy();
 	private:
@@ -24,8 +24,8 @@ Knight::Knight(string name,int x,int y,bool team)
 
 }
 
-void Knight::render(){
-	myTile.renderKnight();
+void Knight::render(bool isEne){
+	myTile.renderKnight(isEne);
 }
 
 void Knight::display(){

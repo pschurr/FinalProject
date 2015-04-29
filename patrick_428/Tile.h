@@ -56,9 +56,9 @@ class Tile
 
                 //Shows the tile
                 void render();
-		void renderArcher();
-		void renderKnight();
-		void renderMage();
+		void renderArcher(bool);
+		void renderKnight(bool);
+		void renderMage(bool);
 		void set_xpos(int);
 		void set_ypos(int);
 		void set_type(int);
@@ -109,17 +109,27 @@ void Tile::render()
 }
 
 
-void Tile::renderKnight()
+void Tile::renderKnight(bool isEne)
 {
+if(!isEne)
 kCharTexture.render(mBox.x, mBox.y, &kTileClips[0]);
+else
+kCharTexture.render(mBox.x, mBox.y, &kEnTileClips[0]);
 }
-void Tile::renderArcher()
+void Tile::renderArcher(bool isEne)
 {
+if(!isEne)
 aCharTexture.render(mBox.x, mBox.y, &aTileClips[0]);
+else
+aCharTexture.render(mBox.x, mBox.y, &aEnTileClips[0]);
 }
-void Tile::renderMage()
+void Tile::renderMage(bool isEne)
 {
+if(!isEne)
 mCharTexture.render(mBox.x, mBox.y, &mTileClips[0]);
+else
+mCharTexture.render(mBox.x, mBox.y, &mEnTileClips[0]);
+
 }
 
 
