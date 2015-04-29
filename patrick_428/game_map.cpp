@@ -114,7 +114,8 @@ int main( int argc, char* args[] )
                                                 quit = true;
                                         }
 					//Check characters in range
-					for(int i=0;i<charVec.size()-1;i++){
+					vector<Character *> temp;
+					for(int i=0;i<charVec.size();i++){
 						bool up=true;
 						bool down=true;
 						bool left=true;
@@ -123,10 +124,20 @@ int main( int argc, char* args[] )
                                                 bool down2=true;
                                                 bool left2=true;
                                                 bool right2=true;
+						for(int j=0;j<charVec.size();j++){
+							if(i!=j)
+								temp.push_back(charVec[j]);
+								//Temp stores all characters other than charVec[i]
+						}
+						for(int j=0;j<enemyVec.size();j++)
+							temp.push_back(enemyVec[j]);
+						for(int j=0;j<temp.size();j++){
+							
+						//}
 
-						for(int j=i+1;j<charVec.size();j++){
-							int xdiff=charVec[i]->getX()-charVec[j]->getX();
-							int ydiff=charVec[i]->getY()-charVec[j]->getY();
+						//for(int j=i+1;j<charVec.size();j++){
+							int xdiff=charVec[i]->getX()-temp[j]->getX();
+							int ydiff=charVec[i]->getY()-temp[j]->getY();
 							if((xdiff<64 && xdiff>-64) && (ydiff<64 && ydiff>-64)){
 								if(ydiff>0){
 									up=false;
@@ -152,9 +163,9 @@ int main( int argc, char* args[] )
 									enemyVec[k]->setCanMove(up,down,left,right);
 								}*/
 							//totalVec[j]->setCanMove(up,down,left,right);
-							charVec[j]->setCanMove(up2,down2,left2,right2);
+							//charVec[j]->setCanMove(up2,down2,left2,right2);
 						}
-                                                for(int j=i+1;j<enemyVec.size();j++){
+                                                /*for(int j=i+1;j<enemyVec.size();j++){
                                                         int xdiff=enemyVec[i]->getX()-enemyVec[j]->getX();
                                                         int ydiff=enemyVec[i]->getY()-enemyVec[j]->getY();
                                                         if((xdiff<64 && xdiff>-64) && (ydiff<64 && ydiff>-64)){
@@ -173,7 +184,7 @@ int main( int argc, char* args[] )
                                                                 }
                                                         }
                                                         enemyVec[j]->setCanMove(up2,down2,left2,right2);
-                                                }
+                                                }*/
 
 						
 						charVec[i]->setCanMove(up,down,left,right);
@@ -586,19 +597,19 @@ bool setTiles()
 	}
 	
 
-	gCharTexture.loadFromFile("pokemon.png");
-        cTileClips[0].x=16;
-        cTileClips[0].y=16;
+	gCharTexture.loadFromFile("charSprites.png");
+        cTileClips[0].x=0;
+        cTileClips[0].y=0;
         cTileClips[0].w=32;
         cTileClips[0].h=32;
 
-	cTileClips[1].x=110;
-        cTileClips[1].y=110;
+	cTileClips[1].x=32;
+        cTileClips[1].y=0;
         cTileClips[1].w=32;
         cTileClips[1].h=32;
 
-	cTileClips[2].x=60;
-        cTileClips[2].y=60;
+	cTileClips[2].x=64;
+        cTileClips[2].y=0;
         cTileClips[2].w=32;
         cTileClips[2].h=32;
 
