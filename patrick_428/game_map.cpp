@@ -75,11 +75,11 @@ int main( int argc, char* args[] )
 
 
 
-			   Character* c1=new Archer("brock",12*32,64,true);
+			Character* c1=new Archer("brock",12*32,64,true);
                         Character* c2=new Mage("marry",14*32,64,true);
                         Character* c3=new Knight("john",16*32,64,true);
                         Character* c4=new Knight("misty",18*32, 64, true);
-                        Character* c5=new Mage("lance", 20*32, 64, true);
+                        Character* c5=new Mage("lance", 640, 64, true);
                         Character* c6=new Archer("archer", 22*32, 64, true);
                         charVec.push_back(c1);
                         charVec.push_back(c2);
@@ -190,8 +190,8 @@ int main( int argc, char* args[] )
 						for(int j=0;j<enemyVec.size();j++)
 							temp.push_back(enemyVec[j]);
 						for(int j=0;j<temp.size();j++){
-							int xdiff=range-temp[j]->getX();
-							int ydiff=range-temp[j]->getY();
+							int xdiff=temp[j]->getX()-charVec[i]->getX();
+							int ydiff=temp[j]->getY()-charVec[i]->getY();
 							if(std::abs(xdiff)<range && std::abs(ydiff)<range){
 								charVec[i]->addToRange(temp[j]);
 							}
@@ -207,9 +207,11 @@ int main( int argc, char* args[] )
                                                 for(int j=0;j<charVec.size();j++)
                                                         temp.push_back(charVec[j]);
                                                 for(int j=0;j<temp.size();j++){
-                                                        int xdiff=range-temp[j]->getX();
-                                                        int ydiff=range-temp[j]->getY();
-                                                        if(std::abs(xdiff)<range && std::abs(ydiff)<range){
+                                                         int xdiff=temp[j]->getX()-enemyVec[i]->getX();
+                                                        int ydiff=temp[j]->getY()-enemyVec[i]->getY();
+
+
+							if(std::abs(xdiff)<range && std::abs(ydiff)<range){
                                                                 enemyVec[i]->addToRange(temp[j]);
                                                         }
                                                 }
@@ -219,6 +221,7 @@ int main( int argc, char* args[] )
 
 					if(playerTurn){
 						for(int i=0;i<charVec.size();i++){
+							bool validMove=false;
                                                 	Character* c=charVec[i];
 							s = c-> handleEvent(e);
 							if(s==1){
@@ -235,32 +238,40 @@ int main( int argc, char* args[] )
 										int mousex,mousey;
 										SDL_GetMouseState(&mousex,&mousey);
 										vector<Character *> inRange=c->getCharsInRange();
-										Character* target;
+										Character* target=NULL;
 										for(int i=0;i<inRange.size();i++){
 											int xloc=inRange[i]->getX();
 											int yloc=inRange[i]->getY();
+											//cout<< xloc<<", " << yloc <<endl;
+											//cout<< mousex<<", "<<mousey<<endl;
 											if(mousex-xloc<32 && mousex-xloc>0 && mousey-yloc<32
-												&& mousey-yloc>0){
+												&& mousey-yloc>0){ cout<<"Entered"<<endl;
 												target=inRange[i];
 												break;
 											}
-										}
+										}if(!target==NULL){
 										cout<<c->getName()<<" attacks "<<target->getName()<<endl;
 										c->attack(target);
 										cout<<target->getName()<<"'s remaining health: ";
 										cout<<target->getHealth()<<"/"<<target->getMaxHealth()<<endl;
 										cout<<"Attack ends"<<endl;
+										validMove=true;
+										}else{
+											cout<<"Invalid attack"<<endl;
+										}
 										x=1;
 									}
 								}
+								if(validMove)
 								turnCount++;
 								cout<<"turns remaining: "<<turns-turnCount<<endl;
 							}
 						}
 					}else{
 						for(int i=0;i<enemyVec.size();i++){
-                                                	Character* c=enemyVec[i];
-                                                        s = c-> handleEvent(e);
+                                                	bool validMove=false;
+							Character* c2=enemyVec[i];
+                                                        s = c2-> handleEvent(e);
                                                         if(s==1){
                                                                 turnCount++;
                                                                 cout<<"turns remaining: "<<turns-turnCount<<endl;
@@ -274,27 +285,35 @@ int main( int argc, char* args[] )
                                                                         if(h.type==SDL_MOUSEBUTTONDOWN){
                                                                                 int mousex,mousey;
                                                                                 SDL_GetMouseState(&mousex,&mousey);
-                                                                                vector<Character *> inRange=c->getCharsInRange();
-                                                                                Character* target;
+		                                                                vector<Character *> inRange=c2->getCharsInRange();
+                                                                                Character* target=NULL;
                                                                                 for(int i=0;i<inRange.size();i++){
                                                                                         int xloc=inRange[i]->getX();
                                                                                         int yloc=inRange[i]->getY();
-											cout<<"---"<<endl;
                                                                                         if(mousex-xloc<32 && mousex-xloc>0 && mousey-yloc<32
                                                                                                 && mousey-yloc>0){
                                                                                                 target=inRange[i];
                                                                                                 break;
                                                                                         }
                                                                                 }
-                                                                                cout<<c->getName()<<" attacks "<<target->getName()<<endl;
-                                                                                c->attack(target);
+										if(!target==NULL){
+                                                                                cout<<c2->getName()<<" attacks "<<target->getName()<<endl;
+                                                                                c2->attack(target);
                                                                                 cout<<target->getName()<<"'s remaining health: ";
                                                                                 cout<<target->getHealth()<<"/"<<target->getMaxHealth()<<endl;
                                                                                 cout<<"Attack ends"<<endl;
+										validMove=true;
+										}
+										else{
+											cout<< "invalid attack"<<endl;
+											}
                                                                                 x=1;
                                                                         }
                                                                 }
+								if(validMove==true)
 								turnCount++;
+
+
 								cout<<"turns remaining: "<<turns-turnCount<<endl;
 
                                                         }
@@ -304,6 +323,19 @@ int main( int argc, char* args[] )
 					}
 
                                 }
+
+				//Remove killed characters and clear ranges
+				for(int i=0;i<charVec.size();i++){
+					charVec[i]->clearRange();
+					if(!charVec[i]->getIsAlive()){
+						cout<<"Is Alive"<<endl;
+						charVec.erase(charVec.begin()+i);}
+				}
+				for(int i=0;i<enemyVec.size();i++){
+					enemyVec[i]->clearRange();
+					if(!enemyVec[i]->getIsAlive())
+						enemyVec.erase(enemyVec.begin()+i);
+				}
 				//Switch player turn
 				if(turns<=turnCount){
 					cout<<"Out of turns"<<endl;

@@ -25,6 +25,7 @@ class Character{
 		int getAttackPwr();
 		int getDefensePwr();
 		int getRange();
+		bool getIsAlive();
 		vector<Character*> getCharsInRange();
 		void setOnMe(bool);
 		void setCanMove(bool,bool,bool,bool);
@@ -35,6 +36,7 @@ class Character{
 		void incrHealth(int);
 		void decrHealth(int);
 		void addToRange(Character *);
+		void clearRange();
 		void attack(Character *);
 	protected:
 		Tile myTile;
@@ -86,6 +88,7 @@ Character::Character(string name,int type,int x,int y,int h,int atk,int def,int 
 	attackPwr=atk;
 	defensePwr=def;
 	range=r;
+	isAlive=true;
 	isEnemy=team;
 	myTile.set_xpos(xloc);
 	myTile.set_ypos(yloc);
@@ -105,6 +108,7 @@ int Character::getAttackPwr(){return attackPwr;}
 int Character::getDefensePwr(){return defensePwr;}
 int Character::getRange(){return range;}
 vector<Character*> Character::getCharsInRange(){return charsInRange;}
+bool Character::getIsAlive(){return isAlive;}
 
 void Character::setOnMe(bool isOnMe){
 	onMe=isOnMe;
@@ -210,6 +214,10 @@ int Character::handleEvent(SDL_Event e){
 
 void Character::addToRange(Character * other){
 	charsInRange.push_back(other);
+}
+
+void Character::clearRange(){
+	charsInRange.clear();
 }
 
 void Character::attack(Character * other){

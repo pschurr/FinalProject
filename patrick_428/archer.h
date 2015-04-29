@@ -19,7 +19,7 @@ class Archer:public Character{
 
 // Instantiate and archer with name, coordinates, and stats
 Archer::Archer(string name,int x,int y,bool team)
-        :Character(name,1,x,y,100,80,80,20,team){
+        :Character(name,1,x,y,100,65,80,8,team){
 
 }
 

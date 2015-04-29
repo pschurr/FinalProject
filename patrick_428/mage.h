@@ -20,7 +20,7 @@ class Mage:public Character{
 
 // Instantiate mage with name, coordinates, and stas
 Mage::Mage(string name,int x,int y,bool team)
-        :Character(name,0,x,y,100,80,80,5,team){
+        :Character(name,0,x,y,100,100,80,5,team){
 
 }
 

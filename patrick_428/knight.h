@@ -20,7 +20,7 @@ class Knight:public Character{
 
 // Instantiate Knight with name, coordinates, and stats
 Knight::Knight(string name,int x,int y,bool team)
-        :Character(name,2,x,y,100,100,100,5,team){
+        :Character(name,2,x,y,100,100,125,2,team){
 
 }
 
