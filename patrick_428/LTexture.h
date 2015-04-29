@@ -108,14 +108,17 @@ SDL_Texture* newTexture = NULL;
         else
         {
                 //Color key image
-                //SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0, 0xFF, 0xFF ) );
-                SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0x3D, 0x62, 0xCF ) );
 	if(file=="mage.png"){
                 SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0x5A,0x78,0xD4 ) );
 		}
-                //SDL_SetColorKey( loadedSurface, SDL_FALSE, SDL_MapRGB( loadedSurface->format, 0xE, 0x72, 0x67 ) );
 		
+	if(file=="knight.png"){
+                SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0x5D,0x00,0xA2 ) );
+		}
 		
+	if(file=="archer.png"){
+                SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0x10,0x00,0x82 ) );
+		}
                 //Create texture from surface pixels
         newTexture = SDL_CreateTextureFromSurface( gRenderer, loadedSurface );
                 if( newTexture == NULL )
