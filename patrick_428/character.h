@@ -24,6 +24,7 @@ class Character{
 		int getAttackPwr();
 		int getDefensePwr();
 		int getRange();
+		vector<Character*> getCharsInRange();
 		void setOnMe(bool);
 		void setCanMove(bool,bool,bool,bool);
 		void moveUp(int);
@@ -101,6 +102,7 @@ int Character::getMaxHealth(){return maxHealth;}
 int Character::getAttackPwr(){return attackPwr;}
 int Character::getDefensePwr(){return defensePwr;}
 int Character::getRange(){return range;}
+vector<Character*> Character::getCharsInRange(){return charsInRange;}
 
 void Character::setOnMe(bool isOnMe){
 	onMe=isOnMe;

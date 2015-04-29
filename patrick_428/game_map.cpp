@@ -327,7 +327,7 @@ int main( int argc, char* args[] )
 							int xdiff=range-temp[j]->getX();
 							int ydiff=range-temp[j]->getY();
 							if(std::abs(xdiff)<range && std::abs(ydiff)<range){
-								cout<<"Character in range"<<endl;
+								//cout<<"Character in range"<<endl;
 								charVec[i]->addToRange(temp[j]);
 							}
 						}
@@ -345,7 +345,7 @@ int main( int argc, char* args[] )
                                                         int xdiff=range-temp[j]->getX();
                                                         int ydiff=range-temp[j]->getY();
                                                         if(std::abs(xdiff)<range && std::abs(ydiff)<range){
-                                                                cout<<"Character in range"<<endl;
+                                                                //cout<<"Character in range"<<endl;
                                                                 charVec[i]->addToRange(temp[j]);
                                                         }
                                                 }
@@ -356,9 +356,18 @@ int main( int argc, char* args[] )
 					if(playerTurn){
 						for(int i=0;i<charVec.size();i++){
                                                 	Character* c=charVec[i];
+							//Key down
 							if(e.key.keysym.sym==SDLK_SPACE){
 								cout<<"Click on a character"<<endl;
 								int mousex, mousey;
+								if(SDL_PollEvent(&e) == SDL_MOUSEBUTTONDOWN){
+									SDL_GetMouseState(&mousex,&mousey);
+									vector<Character *> inRange=c->getCharsInRange();
+									for(int i=0;i<inRange.size();i++){
+										if((mousex-inRange[i]->getX())<32 && (mousey-inRange[i]->getY())<32)
+											c->attack(inRange[i]);
+									}
+								}
 								
 							}
 							s = c-> handleEvent(e);
