@@ -150,6 +150,7 @@ int main( int argc, char* args[] )
 								}*/
 							//totalVec[j]->setCanMove(up,down,left,right);
 							charVec[j]->setCanMove(up2,down2,left2,right2);
+						}
                                                 for(int j=i+1;j<enemyVec.size();j++){
                                                         int xdiff=enemyVec[i]->getX()-enemyVec[j]->getX();
                                                         int ydiff=enemyVec[i]->getY()-enemyVec[j]->getY();
@@ -171,7 +172,7 @@ int main( int argc, char* args[] )
                                                         enemyVec[j]->setCanMove(up2,down2,left2,right2);
                                                 }
 
-						}
+						
 						charVec[i]->setCanMove(up,down,left,right);
 					}
                                         /*for(int i=0;i<charVec.size()-1;i++){
