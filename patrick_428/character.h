@@ -32,6 +32,7 @@ class Character{
 		void moveRight(int);
 		void incrHealth(int);
 		void decrHealth(int);
+		void addToRange(Character *);
 		void attack(Character *);
 	protected:
 		Tile myTile;
@@ -200,6 +201,10 @@ int Character::handleEvent(SDL_Event e){
 	myTile.set_xpos(xloc);
 	myTile.set_ypos(yloc);
 	return status;
+}
+
+void Character::addToRange(Character * other){
+	charsInRange.push_back(other);
 }
 
 void Character::attack(Character * other){

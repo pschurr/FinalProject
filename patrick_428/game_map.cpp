@@ -16,7 +16,7 @@
 #include "mage.h"
 #include "archer.h"
 #include <vector>
-
+#include <cmath>
 
 //Starts up SDL and creates window
 bool init();
@@ -120,10 +120,6 @@ int main( int argc, char* args[] )
 						bool down=true;
 						bool left=true;
 						bool right=true;
-                                                bool up2=true;
-                                                bool down2=true;
-                                                bool left2=true;
-                                                bool right2=true;
 						for(int j=0;j<charVec.size();j++){
 							if(i!=j)
 								temp.push_back(charVec[j]);
@@ -132,10 +128,53 @@ int main( int argc, char* args[] )
 						for(int j=0;j<enemyVec.size();j++)
 							temp.push_back(enemyVec[j]);
 						for(int j=0;j<temp.size();j++){
+							int xst=charVec[i]->getX();
+							int yst=charVec[i]->getY();
+							if(temp[j]->getX()==xst-32 && temp[j]->getY()==yst)
+								left=false;
+							if(temp[j]->getX()==xst+32 && temp[j]->getY()==yst)
+								right=false;
+							if(temp[j]->getX()==xst && temp[j]->getY()==yst-32)
+								up=false;
+							if(temp[j]->getX()==xst && temp[j]->getY()==yst+32)
+								down=false;
 							
-						//}
+						}
+						
+						charVec[i]->setCanMove(up,down,left,right);
+						temp.clear();
+					}
+                                        for(int i=0;i<enemyVec.size();i++){
+                                                bool up=true;
+                                                bool down=true;
+                                                bool left=true;
+                                                bool right=true;
+                                                for(int j=0;j<enemyVec.size();j++){
+                                                        if(i!=j)
+                                                                temp.push_back(enemyVec[j]);
+                                                }
+                                                for(int j=0;j<charVec.size();j++)
+                                                        temp.push_back(charVec[j]);
+                                                for(int j=0;j<temp.size();j++){
+                                                        int xst=enemyVec[i]->getX();
+                                                        int yst=enemyVec[i]->getY();
+                                                        if(temp[j]->getX()==xst-32 && temp[j]->getY()==yst)
+                                                                left=false;
+                                                        if(temp[j]->getX()==xst+32 && temp[j]->getY()==yst)
+                                                                right=false;
+                                                        if(temp[j]->getX()==xst && temp[j]->getY()==yst-32)
+                                                                up=false;
+                                                        if(temp[j]->getX()==xst && temp[j]->getY()==yst+32)
+                                                                down=false;
 
-						//for(int j=i+1;j<charVec.size();j++){
+                                                }
+
+                                                enemyVec[i]->setCanMove(up,down,left,right);
+						temp.clear();
+                                        }
+
+					
+						/*for(int j=i+1;j<charVec.size();j++){
 							int xdiff=charVec[i]->getX()-temp[j]->getX();
 							int ydiff=charVec[i]->getY()-temp[j]->getY();
 							if((xdiff<64 && xdiff>-64) && (ydiff<64 && ydiff>-64)){
@@ -154,7 +193,7 @@ int main( int argc, char* args[] )
 								}
 							}
 
-							/*for(int k=0;k<charVec.size();k++)
+							for(int k=0;k<charVec.size();k++)
 								if(charVec[k]==totalVec[i]){
 									charVec[k]->setCanMove(up,down,left,right);
 								}
@@ -164,7 +203,7 @@ int main( int argc, char* args[] )
 								}*/
 							//totalVec[j]->setCanMove(up,down,left,right);
 							//charVec[j]->setCanMove(up2,down2,left2,right2);
-						}
+						//}
                                                 /*for(int j=i+1;j<enemyVec.size();j++){
                                                         int xdiff=enemyVec[i]->getX()-enemyVec[j]->getX();
                                                         int ydiff=enemyVec[i]->getY()-enemyVec[j]->getY();
@@ -187,8 +226,8 @@ int main( int argc, char* args[] )
                                                 }*/
 
 						
-						charVec[i]->setCanMove(up,down,left,right);
-					}
+						//charVec[i]->setCanMove(up,down,left,right);
+					//}
                                         /*for(int i=0;i<charVec.size()-1;i++){
                                                 bool up=true;
                                                 bool down=true;
@@ -221,7 +260,7 @@ int main( int argc, char* args[] )
                                                 }
                                                 charVec[i]->setCanMove(up,down,left,right);
                                         }*/
-                                        for(int i=0;i<enemyVec.size()-1;i++){
+                                        /*for(int i=0;i<enemyVec.size()-1;i++){
                                                 bool up=true;
                                                 bool down=true;
                                                 bool left=true;
@@ -273,13 +312,55 @@ int main( int argc, char* args[] )
 
                                                 }
                                                 enemyVec[i]->setCanMove(up,down,left,right);
-                                        }
+                                        }*/
 
+					//Update characters in range
+					for(int i=0;i<charVec.size();i++){
+						int range=charVec[i]->getRange()*32;
+						for(int j=0;j<charVec.size();j++){
+							if(i!=j)
+								temp.push_back(charVec[j]);
+						}
+						for(int j=0;j<enemyVec.size();j++)
+							temp.push_back(enemyVec[j]);
+						for(int j=0;j<temp.size();j++){
+							int xdiff=range-temp[j]->getX();
+							int ydiff=range-temp[j]->getY();
+							if(std::abs(xdiff)<range && std::abs(ydiff)<range){
+								cout<<"Character in range"<<endl;
+								charVec[i]->addToRange(temp[j]);
+							}
+						}
+						temp.clear();
+					}
+                                        for(int i=0;i<enemyVec.size();i++){
+                                                int range=enemyVec[i]->getRange()*32;
+                                                for(int j=0;j<enemyVec.size();j++){
+                                                        if(i!=j)
+                                                                temp.push_back(enemyVec[j]);
+						}
+                                                for(int j=0;j<charVec.size();j++)
+                                                        temp.push_back(charVec[j]);
+                                                for(int j=0;j<temp.size();j++){
+                                                        int xdiff=range-temp[j]->getX();
+                                                        int ydiff=range-temp[j]->getY();
+                                                        if(std::abs(xdiff)<range && std::abs(ydiff)<range){
+                                                                cout<<"Character in range"<<endl;
+                                                                charVec[i]->addToRange(temp[j]);
+                                                        }
+                                                }
+                                                temp.clear();
+                                        }
 
 
 					if(playerTurn){
 						for(int i=0;i<charVec.size();i++){
                                                 	Character* c=charVec[i];
+							if(e.key.keysym.sym==SDLK_SPACE){
+								cout<<"Click on a character"<<endl;
+								int mousex, mousey;
+								
+							}
 							s = c-> handleEvent(e);
 							if(s==1){
 								turnCount++;
