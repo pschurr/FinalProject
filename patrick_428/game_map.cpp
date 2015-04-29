@@ -202,7 +202,10 @@ int main( int argc, char* args[] )
 					cout<<"Out of turns"<<endl;
 					turnCount=0;
 					playerTurn=!playerTurn;
-					
+					for(int i=0;i<charVec.size();i++)
+						charVec[i]->setOnMe(false);
+					for(int i=0;i<enemyVec.size();i++)
+						enemyVec[i]->setOnMe(false);
 				}
                                 //Clear screen
                                 SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );

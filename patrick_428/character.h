@@ -23,6 +23,7 @@ class Character{
 		int getAttackPwr();
 		int getDefensePwr();
 		int getRange();
+		void setOnMe(bool);
 		void moveUp(int);
 		void moveDown(int);
 		void moveLeft(int);
@@ -88,6 +89,10 @@ int Character::getMaxHealth(){return maxHealth;}
 int Character::getAttackPwr(){return attackPwr;}
 int Character::getDefensePwr(){return defensePwr;}
 int Character::getRange(){return range;}
+
+void Character::setOnMe(bool isOnMe){
+	onMe=isOnMe;
+}
 
 void Character::moveUp(int dist){
 	yloc-=dist;
