@@ -10,7 +10,7 @@ using namespace std;
 class Knight:public Character{
 	public:
 		Knight(string,int,int,bool);
-//		Knight(int,int,int,int,int,int,bool);
+		virtual string getType();
 		virtual void render();
 		virtual void display();
 		bool findEnemy();
@@ -23,6 +23,8 @@ Knight::Knight(string name,int x,int y,bool team)
         :Character(name,2,x,y,100,100,125,2,team){
 
 }
+
+string Knight::getType(){return "Knight";}
 
 // Determine what team the Knight is on
 void Knight::render(){

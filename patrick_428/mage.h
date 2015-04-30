@@ -11,6 +11,7 @@ using namespace std;
 class Mage:public Character{
         public:
                 Mage(string,int,int,bool);
+		virtual string getType();
                 virtual void render();
 		virtual void display();
 		void heal(Character*);
@@ -23,6 +24,8 @@ Mage::Mage(string name,int x,int y,bool team)
         :Character(name,0,x,y,100,100,80,5,team){
 
 }
+
+string Mage::getType(){return "Mage";}
 
 
 // Determine which mage sprite display depending what team mage is on

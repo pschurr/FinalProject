@@ -11,6 +11,7 @@ using namespace std;
 class Archer:public Character{
         public:
                 Archer(string,int,int,bool);
+		virtual string getType();
                 virtual void render();
 		virtual void display();
         private:
@@ -23,6 +24,7 @@ Archer::Archer(string name,int x,int y,bool team)
 
 }
 
+string Archer::getType(){return "Archer";}
 
 // Determine which archer sprite to display depending what team the archer is on
 void Archer::render(){

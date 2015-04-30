@@ -17,16 +17,18 @@ class Character{
 		virtual void render();
 		virtual void display();
 		int handleEvent(SDL_Event);
+		virtual string getType();
 		string getName();
 		int getX();
 		int getY();
-		int getHealth();
-		int getMaxHealth();
+		virtual int getHealth();
+		virtual int getMaxHealth();
 		int getAttackPwr();
 		int getDefensePwr();
 		int getRange();
 		bool getIsAlive();
 		vector<Character*> getCharsInRange();
+		bool isSelected();
 		void setOnMe(bool);
 		void setCanMove(bool,bool,bool,bool);
 		void moveUp(int);
@@ -99,6 +101,7 @@ Character::Character(string name,int type,int x,int y,int h,int atk,int def,int 
         canMove[3]=true;
 }
 
+string Character::getType(){}
 string Character::getName(){return mName;}
 int Character::getX(){return xloc;}
 int Character::getY(){return yloc;}
@@ -109,6 +112,7 @@ int Character::getDefensePwr(){return defensePwr;}
 int Character::getRange(){return range;}
 vector<Character*> Character::getCharsInRange(){return charsInRange;}
 bool Character::getIsAlive(){return isAlive;}
+bool Character::isSelected(){return onMe;}
 
 void Character::setOnMe(bool isOnMe){
 	onMe=isOnMe;

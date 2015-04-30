@@ -17,6 +17,10 @@
 #include "archer.h"
 #include <vector>
 #include <cmath>
+#include <cstdlib>
+#include <iomanip>
+#include <locale>
+#include <sstream>
 
 //Starts up SDL and creates window
 bool init();
@@ -111,7 +115,7 @@ int main( int argc, char* args[] )
 			bool playerTurn=true; //true if player 1 turn
                         //While application is running
                         while( !quit )
-                        {
+			{
                                 //Handle events on queue
                                 while( SDL_PollEvent( &e ) != 0 )
                                 {
@@ -357,6 +361,7 @@ int main( int argc, char* args[] )
 						charVec[i]->setOnMe(false);
 					for(int i=0;i<enemyVec.size();i++)
 						enemyVec[i]->setOnMe(false);
+					current=NULL;
 				}
 				//Determine if game has ended
 				if(charVec.size()==0){
@@ -390,12 +395,44 @@ int main( int argc, char* args[] )
                                 // render text box
 				SDL_Color Black = {0,0,0};
 				SDL_Color White = {255,255,255};
+				LTexture playerBox;
 				LTexture nameBox;
 				LTexture typeBox;
 				LTexture healthBox;
-				nameBox.loadFromRenderedText("Name:",White,Black);
-				typeBox.loadFromRenderedText("Type: ",White,Black);
-				healthBox.loadFromRenderedText("Health:",White,Black);
+				string nameStr="Name: ",typeStr="Type: ",fullHealthStr="Health: ",healthStr,maxHealthStr;
+				string playerStr;
+				if(playerTurn)
+					playerStr="Player 1's turn!";
+				else
+					playerStr="Player 2's turn!";
+				//Find current character
+				for(int i=0;i<charVec.size();i++)
+					if(charVec[i]->isSelected()){
+						current=charVec[i];
+						break;
+					}
+				for(int i=0;i<enemyVec.size();i++)
+					if(enemyVec[i]->isSelected()){
+						current=enemyVec[i];
+						break;
+					}
+				if(current!=NULL){
+					nameStr="Name: "+current->getName();
+					typeStr="Type: "+current->getType();
+					ostringstream convert;
+					convert<<current->getHealth();
+					healthStr=convert.str();
+					convert.str("");
+					convert<<current->getMaxHealth();
+					maxHealthStr=convert.str();
+					fullHealthStr="Health: "+healthStr+"/"+maxHealthStr;
+				}
+				//cout<<nameStr<<"\n"<<typeStr<<"\n"<<healthStr<<endl;
+				playerBox.loadFromRenderedText(playerStr,White,Black);
+				nameBox.loadFromRenderedText(nameStr,White,Black);
+				typeBox.loadFromRenderedText(typeStr,White,Black);
+				healthBox.loadFromRenderedText(fullHealthStr,White,Black);
+				playerBox.render(0,750);
 				nameBox.render(0,800);
 				typeBox.render(0,850);
 				healthBox.render(0,900);
