@@ -113,7 +113,9 @@ int main( int argc, char* args[] )
 			int turnCount=0; //current turns used
 			int s; //for event handling
 			bool playerTurn=true; //true if player 1 turn
-                        //While application is running
+			string message1="   ";
+			string message2="   "; //displays in-game messages
+                       //While application is running
                         while( !quit )
 			{
                                 //Handle events on queue
@@ -244,10 +246,10 @@ int main( int argc, char* args[] )
 							s = c-> handleEvent(e);
 							if(s==1){
 								turnCount++;
-								cout<<"turns remaining: "<<turns-turnCount<<endl;
 							}else if(s==2){
 								//Wait for mouse click
-								cout<<"Click on a character"<<endl;
+								message1="Click on a character";
+								message2="...";
 								SDL_Event g;
 								int x =0;
 								while(x==0){
@@ -266,21 +268,33 @@ int main( int argc, char* args[] )
 												break;
 											}
 										}if(!target==NULL){
-										cout<<c->getName()<<" attacks "<<target->getName()<<endl;
+										message1=c->getName()+" attacks "+target->getName();
+										//cout<<c->getName()<<" attacks "<<target->getName()<<endl;
 										c->attack(target);
-										cout<<target->getName()<<"'s remaining health: ";
-										cout<<target->getHealth()<<"/"<<target->getMaxHealth()<<endl;
-										cout<<"Attack ends"<<endl;
+										message2=target->getName()+"'s remaining health: ";
+										ostringstream convert;
+										string temp1, temp2;
+										convert<<target->getHealth();
+										temp1=convert.str();
+										convert.str("");
+										convert<<target->getMaxHealth();
+										temp2=convert.str();
+										convert.str("");
+										message2+=temp1+"/"+temp2;
+										//cout<<target->getName()<<"'s remaining health: ";
+										//cout<<target->getHealth()<<"/"<<target->getMaxHealth()<<endl;
+										//cout<<"Attack ends"<<endl;
 										validMove=true;
 										}else{
-											cout<<"Invalid attack"<<endl;
+											message1="Invalid attack";
+											message2="...";
+											//cout<<"Invalid attack"<<endl;
 										}
 										x=1;
 									}
 								}
 								if(validMove)
 								turnCount++;
-								cout<<"turns remaining: "<<turns-turnCount<<endl;
 							}
 						}
 					}else{
@@ -290,10 +304,9 @@ int main( int argc, char* args[] )
                                                         s = c2-> handleEvent(e);
                                                         if(s==1){
                                                                 turnCount++;
-                                                                cout<<"turns remaining: "<<turns-turnCount<<endl;
                                                         }else if(s==2){
 								//Wait for mouse click
-	                                                        cout<<"Click on a character"<<endl;
+	                                                        message1="Click on a character";
                                                                 SDL_Event h;
                                                                 int x =0;
                                                                 while(x==0){
@@ -313,15 +326,31 @@ int main( int argc, char* args[] )
                                                                                         }
                                                                                 }
 										if(!target==NULL){
-                                                                                cout<<c2->getName()<<" attacks "<<target->getName()<<endl;
+										message1=c2->getName()+" attacks "+target->getName();
+                                                                                //cout<<c2->getName()<<" attacks "<<target->getName()<<endl;
                                                                                 c2->attack(target);
-                                                                                cout<<target->getName()<<"'s remaining health: ";
-                                                                                cout<<target->getHealth()<<"/"<<target->getMaxHealth()<<endl;
-                                                                                cout<<"Attack ends"<<endl;
+                                                                                message2=target->getName()+"'s remaining health: ";
+                                                                                ostringstream convert;
+                                                                                string temp1, temp2;
+                                                                                convert<<target->getHealth();
+                                                                                temp1=convert.str();
+                                                                                convert.str("");
+                                                                                convert<<target->getMaxHealth();
+                                                                                temp2=convert.str();
+                                                                                convert.str("");
+                                                                                message2+=temp1+"/"+temp2;
+
+                                                                                //message2+=target->getHealth()+"/"+target->getMaxHealth();
+
+                                                                                //cout<<target->getName()<<"'s remaining health: ";
+                                                                                //cout<<target->getHealth()<<"/"<<target->getMaxHealth()<<endl;
+                                                                                //cout<<"Attack ends"<<endl;
 										validMove=true;
 										}
 										else{
-											cout<< "invalid attack"<<endl;
+											message1="Invalid attack";
+											message2="...";
+											//cout<< "invalid attack"<<endl;
 											}
                                                                                 x=1;
                                                                         }
@@ -330,7 +359,7 @@ int main( int argc, char* args[] )
 								turnCount++;
 
 
-								cout<<"turns remaining: "<<turns-turnCount<<endl;
+								//cout<<"turns remaining: "<<turns-turnCount<<endl;
 
                                                         }
 
@@ -353,7 +382,9 @@ int main( int argc, char* args[] )
 				}
 				//Switch player turn
 				if(turns<=turnCount){
-					cout<<"Out of turns"<<endl;
+					message1="Out of turns";
+					message2="...";
+					//cout<<"Out of turns"<<endl;
 					turnCount=0;
 					playerTurn=!playerTurn;
 					//Unset active character
@@ -363,11 +394,16 @@ int main( int argc, char* args[] )
 						enemyVec[i]->setOnMe(false);
 					current=NULL;
 				}
+
 				//Determine if game has ended
 				if(charVec.size()==0){
+					message1="Player 2 wins!";
+					message2="...";
 					cout<<"Player 2 wins!"<<endl;
 					quit=true;
 				}else if(enemyVec.size()==0){
+					message1="Player 1 wins!";
+					message2="...";
 					cout<<"Player 1 wins!"<<endl;
 					quit=true;
 				}
@@ -400,6 +436,7 @@ int main( int argc, char* args[] )
 				LTexture nameBox;
 				LTexture typeBox;
 				LTexture healthBox;
+				LTexture msgBox1, msgBox2;
 				string nameStr="Name: ",typeStr="Type: ",fullHealthStr="Health: ",healthStr,maxHealthStr;
 				string playerStr,turnStr;
 				if(playerTurn)
@@ -429,6 +466,7 @@ int main( int argc, char* args[] )
 					convert.str("");
 					convert<<current->getMaxHealth();
 					maxHealthStr=convert.str();
+					convert.str("");
 					fullHealthStr="Health: "+healthStr+"/"+maxHealthStr;
 				}
 				playerBox.loadFromRenderedText(playerStr,White,Black);
@@ -436,11 +474,15 @@ int main( int argc, char* args[] )
 				nameBox.loadFromRenderedText(nameStr,White,Black);
 				typeBox.loadFromRenderedText(typeStr,White,Black);
 				healthBox.loadFromRenderedText(fullHealthStr,White,Black);
+				msgBox1.loadFromRenderedText(message1,White,Black);
+				msgBox2.loadFromRenderedText(message2,White,Black);
 				playerBox.render(0,700);
 				turnBox.render(0,750);
 				nameBox.render(0,800);
 				typeBox.render(0,850);
 				healthBox.render(0,900);
+				msgBox1.render(SCREEN_WIDTH-300,850);
+				msgBox2.render(SCREEN_WIDTH-300,900);
                                 //Update screen
                                 SDL_RenderPresent( gRenderer );
                         }
