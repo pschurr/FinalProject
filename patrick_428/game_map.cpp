@@ -261,7 +261,7 @@ int main( int argc, char* args[] )
 											int xloc=inRange[i]->getX();
 											int yloc=inRange[i]->getY();
 											if(mousex-xloc<32 && mousex-xloc>0 && mousey-yloc<32
-												&& mousey-yloc>0){ cout<<"Entered"<<endl;
+												&& mousey-yloc>0){ 
 												target=inRange[i];
 												break;
 											}
@@ -396,15 +396,20 @@ int main( int argc, char* args[] )
 				SDL_Color Black = {0,0,0};
 				SDL_Color White = {255,255,255};
 				LTexture playerBox;
+				LTexture turnBox;
 				LTexture nameBox;
 				LTexture typeBox;
 				LTexture healthBox;
 				string nameStr="Name: ",typeStr="Type: ",fullHealthStr="Health: ",healthStr,maxHealthStr;
-				string playerStr;
+				string playerStr,turnStr;
 				if(playerTurn)
 					playerStr="Player 1's turn!";
 				else
 					playerStr="Player 2's turn!";
+				ostringstream convert;
+				convert<<(turns-turnCount);
+				turnStr="Turns left: "+convert.str();
+				convert.str("");
 				//Find current character
 				for(int i=0;i<charVec.size();i++)
 					if(charVec[i]->isSelected()){
@@ -419,7 +424,6 @@ int main( int argc, char* args[] )
 				if(current!=NULL){
 					nameStr="Name: "+current->getName();
 					typeStr="Type: "+current->getType();
-					ostringstream convert;
 					convert<<current->getHealth();
 					healthStr=convert.str();
 					convert.str("");
@@ -427,12 +431,13 @@ int main( int argc, char* args[] )
 					maxHealthStr=convert.str();
 					fullHealthStr="Health: "+healthStr+"/"+maxHealthStr;
 				}
-				//cout<<nameStr<<"\n"<<typeStr<<"\n"<<healthStr<<endl;
 				playerBox.loadFromRenderedText(playerStr,White,Black);
+				turnBox.loadFromRenderedText(turnStr,White,Black);
 				nameBox.loadFromRenderedText(nameStr,White,Black);
 				typeBox.loadFromRenderedText(typeStr,White,Black);
 				healthBox.loadFromRenderedText(fullHealthStr,White,Black);
-				playerBox.render(0,750);
+				playerBox.render(0,700);
+				turnBox.render(0,750);
 				nameBox.render(0,800);
 				typeBox.render(0,850);
 				healthBox.render(0,900);

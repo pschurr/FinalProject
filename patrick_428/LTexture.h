@@ -167,7 +167,8 @@ bool LTexture::loadFromRenderedText( std::string textureText, SDL_Color textColo
                    if( mTexture == NULL )
                                  {
                             printf( "Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError());                                                                                                                                }
-          else                                                                                                                                    {                                                                                                                      //Get image dimensions
+          else{  
+           //Get image dimensions
            mWidth = 300;
          mHeight = 50;
                 }
