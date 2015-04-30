@@ -395,17 +395,19 @@ int main( int argc, char* args[] )
 					current=NULL;
 				}
 
+
 				//Determine if game has ended
+				bool finished=false;
 				if(charVec.size()==0){
 					message1="Player 2 wins!";
-					message2="...";
+					message2="Press any key to quit";
 					cout<<"Player 2 wins!"<<endl;
-					quit=true;
+					finished=true;
 				}else if(enemyVec.size()==0){
 					message1="Player 1 wins!";
-					message2="...";
+					message2="Press any key to quit";
 					cout<<"Player 1 wins!"<<endl;
-					quit=true;
+					finished=true;
 				}
 				
                                 //Clear screen
@@ -485,6 +487,14 @@ int main( int argc, char* args[] )
 				msgBox2.render(SCREEN_WIDTH-300,900);
                                 //Update screen
                                 SDL_RenderPresent( gRenderer );
+
+				while(finished){
+					SDL_PollEvent(&e);
+					if(e.type==SDL_KEYDOWN){
+						quit=true;
+						finished=false;
+					}
+				}
                         }
                 }
                 //Free resources and close SDL
