@@ -137,6 +137,15 @@ int main( int argc, char* args[] )
 						for(int j=0;j<temp.size();j++){
 							int xst=charVec[i]->getX();
 							int yst=charVec[i]->getY();
+							//Prevent characters from leaving the screen
+							if(xst<32)
+								left=false;
+							if(xst>LEVEL_WIDTH-32)
+								right=false;
+							if(yst<32)
+								up=false;
+							if(yst>LEVEL_HEIGHT-32)
+								down=false;
 							if(temp[j]->getX()==xst-32 && temp[j]->getY()==yst)
 								left=false;
 							if(temp[j]->getX()==xst+32 && temp[j]->getY()==yst)
@@ -165,6 +174,14 @@ int main( int argc, char* args[] )
                                                 for(int j=0;j<temp.size();j++){
                                                         int xst=enemyVec[i]->getX();
                                                         int yst=enemyVec[i]->getY();
+                                                        if(xst<32)
+                                                                left=false;
+                                                        if(xst>LEVEL_WIDTH-32)
+                                                                right=false;
+                                                        if(yst<32)
+                                                                up=false;
+                                                        if(yst>LEVEL_HEIGHT-32)
+                                                                down=false;
                                                         if(temp[j]->getX()==xst-32 && temp[j]->getY()==yst)
                                                                 left=false;
                                                         if(temp[j]->getX()==xst+32 && temp[j]->getY()==yst)
@@ -175,7 +192,6 @@ int main( int argc, char* args[] )
                                                                 down=false;
 
                                                 }
-
                                                 enemyVec[i]->setCanMove(up,down,left,right);
 						temp.clear();
                                         }
@@ -207,10 +223,8 @@ int main( int argc, char* args[] )
                                                 for(int j=0;j<charVec.size();j++)
                                                         temp.push_back(charVec[j]);
                                                 for(int j=0;j<temp.size();j++){
-                                                         int xdiff=temp[j]->getX()-enemyVec[i]->getX();
+                                                        int xdiff=temp[j]->getX()-enemyVec[i]->getX();
                                                         int ydiff=temp[j]->getY()-enemyVec[i]->getY();
-
-
 							if(std::abs(xdiff)<range && std::abs(ydiff)<range){
                                                                 enemyVec[i]->addToRange(temp[j]);
                                                         }
@@ -242,8 +256,6 @@ int main( int argc, char* args[] )
 										for(int i=0;i<inRange.size();i++){
 											int xloc=inRange[i]->getX();
 											int yloc=inRange[i]->getY();
-											//cout<< xloc<<", " << yloc <<endl;
-											//cout<< mousex<<", "<<mousey<<endl;
 											if(mousex-xloc<32 && mousex-xloc>0 && mousey-yloc<32
 												&& mousey-yloc>0){ cout<<"Entered"<<endl;
 												target=inRange[i];
@@ -328,7 +340,6 @@ int main( int argc, char* args[] )
 				for(int i=0;i<charVec.size();i++){
 					charVec[i]->clearRange();
 					if(!charVec[i]->getIsAlive()){
-						cout<<"Is Alive"<<endl;
 						charVec.erase(charVec.begin()+i);}
 				}
 				for(int i=0;i<enemyVec.size();i++){
@@ -365,10 +376,9 @@ int main( int argc, char* args[] )
 				temp.render();
                                 }
 
-				  for(int i=0; i<charVec.size();i++)
-				     {
+				for(int i=0; i<charVec.size();i++){
        					charVec[i]->render();
-					 }
+				}
 				for(int i=0;i<enemyVec.size();i++){
 					enemyVec[i]->render();
 				}
