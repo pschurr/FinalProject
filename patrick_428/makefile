@@ -8,4 +8,5 @@ FLAGS = -w -lSDL2 -lSDL2_image -lSDL2_ttf
 all : $(PROJECT)
 	g++ $(PROJECT) $(FLAGS) -o $(PROJ_NAME)
 
-
+clean:
+	rm game

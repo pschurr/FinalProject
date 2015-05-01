@@ -237,6 +237,8 @@ void Character::attack(Character * other){
 		return;
 	}else{
 		int damage=(int)((1.5*attackPwr-other->getDefensePwr())/2.5);
+		if(damage<=5)
+			damage=5;
 		other->decrHealth(damage);
 	}
 }

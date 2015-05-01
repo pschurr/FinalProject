@@ -109,7 +109,7 @@ int main( int argc, char* args[] )
 			//Active character controlled by player
 			Character* current = NULL;
 
-			int turns=5; //max number of turns
+			int turns=10; //max number of turns
 			int turnCount=0; //current turns used
 			int s; //for event handling
 			bool playerTurn=true; //true if player 1 turn
@@ -439,7 +439,7 @@ int main( int argc, char* args[] )
 				LTexture typeBox;
 				LTexture healthBox;
 				LTexture msgBox1, msgBox2;
-				string nameStr="Name: ",typeStr="Type: ",fullHealthStr="Health: ",healthStr,maxHealthStr;
+				string nameStr="   ",typeStr="   ",fullHealthStr="   ",healthStr="   ",maxHealthStr;
 				string playerStr,turnStr;
 				if(playerTurn)
 					playerStr="Player 1's turn!";
@@ -478,11 +478,14 @@ int main( int argc, char* args[] )
 				healthBox.loadFromRenderedText(fullHealthStr,White,Black);
 				msgBox1.loadFromRenderedText(message1,White,Black);
 				msgBox2.loadFromRenderedText(message2,White,Black);
-				playerBox.render(0,700);
-				turnBox.render(0,750);
-				nameBox.render(0,800);
-				typeBox.render(0,850);
-				healthBox.render(0,900);
+				playerBox.render(0,850);
+				turnBox.render(0,900);
+				if(nameStr!="   ")
+					nameBox.render(0,700);
+				if(typeStr!="   ")
+					typeBox.render(0,750);
+				if(healthStr!="   ")
+					healthBox.render(0,800);
 				msgBox1.render(SCREEN_WIDTH-300,850);
 				msgBox2.render(SCREEN_WIDTH-300,900);
                                 //Update screen
